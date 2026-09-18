@@ -1,0 +1,24 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# {{ site.title }}
+
+> {{ site.description }}
+
+{{ site.app.name }} ({{ site.app.url }}) is a web app for ski tourers and
+off-piste skiers in the Alps. It shows the avalanche bulletins published by
+SLF (Switzerland), ALBINA / EUREGIO (Tyrol, South Tyrol, Trentino) and
+Météo-France in full, on a map, alongside weather, routes and trips. This site
+explains how it works and why it was built the way it was.
+
+## Posts
+{% for post in collections.posts | reverse %}
+- [{{ post.data.title }}]({{ post.url | siteUrl }}){% if post.data.description %}: {{ post.data.description }}{% endif %}
+{%- endfor %}
+
+## Links
+
+- [{{ site.app.name }}]({{ site.app.url }}): the app itself
+- [Atom feed]({{ "/feed.xml" | siteUrl }})
+- [Sitemap]({{ "/sitemap.xml" | siteUrl }})

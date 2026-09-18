@@ -1,0 +1,25 @@
+# Render Blueprint for build.snowdesk.info — a Static Site, no server.
+# Render runs the build on every push to main and serves _site/ from its CDN.
+services:
+  - type: web
+    runtime: static
+    name: snowdesk-build-blog
+    branch: main
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./_site
+    pullRequestPreviewsEnabled: true
+    domains:
+      - build.snowdesk.info
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /assets/fonts/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable

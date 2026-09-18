@@ -1,0 +1,44 @@
+# CI for build.snowdesk.info. Two jobs, both on every push and PR:
+#   check      — build WITH drafts (so the placeholder post exercises the
+#                post layout and youtube shortcode), validate the HTML,
+#                check every internal link.
+#   lighthouse — build exactly what Render publishes (no drafts) and gate
+#                every sitemap URL on Lighthouse SEO + accessibility.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lighthouse
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          if-no-files-found: ignore

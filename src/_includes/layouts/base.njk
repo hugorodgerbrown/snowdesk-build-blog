@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ site.language }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- set pageTitle = (title + " · " + site.title) if title and page.url != "/" else site.title %}
+    {%- set pageDescription = description or site.description %}
+    {%- set canonical = page.url | siteUrl %}
+    <title>{{ pageTitle }}</title>
+    <meta name="description" content="{{ pageDescription }}">
+    <link rel="canonical" href="{{ canonical }}">
+    {%- if draft or noindex %}
+    <meta name="robots" content="noindex">
+    {%- endif %}
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:type" content="{{ 'article' if layout == 'layouts/post.njk' else 'website' }}">
+    <meta property="og:title" content="{{ title or site.title }}">
+    <meta property="og:description" content="{{ pageDescription }}">
+    <meta property="og:url" content="{{ canonical }}">
+    <meta property="og:locale" content="{{ site.language | replace('-', '_') }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ title or site.title }}">
+    <meta name="twitter:description" content="{{ pageDescription }}">
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/feed.xml">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preload" href="/assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <script type="application/ld+json">{{ {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": site.url + "#website",
+          "url": site.url,
+          "name": site.title,
+          "description": site.description,
+          "inLanguage": site.language,
+          "publisher": { "@id": site.app.url + "#organization" }
+        },
+        {
+          "@type": "Organization",
+          "@id": site.app.url + "#organization",
+          "name": site.app.name,
+          "url": site.app.url,
+          "sameAs": [site.app.url]
+        }
+      ]
+    } | jsonLd | safe }}</script>
+    {%- block head %}{% endblock %}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="site-title" href="/">{{ site.title }}</a>
+      <nav aria-label="Site">
+        <a href="{{ site.app.url }}">Open {{ site.app.name }}</a>
+      </nav>
+    </header>
+    <main id="main">
+      {{ content | safe }}
+    </main>
+    <footer class="site-footer">
+      <p>
+        <a href="{{ site.app.url }}">{{ site.app.name }}</a> ·
+        <a href="/feed.xml">Feed</a> ·
+        <a href="/llms.txt">llms.txt</a>
+      </p>
+    </footer>
+  </body>
+</html>

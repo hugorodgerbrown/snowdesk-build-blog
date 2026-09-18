@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+---
+{%- set postUrl = page.url | siteUrl %}
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": page.date | isoDate,
+  "dateModified": (updated or page.date) | isoDate,
+  "url": postUrl,
+  "mainEntityOfPage": postUrl,
+  "inLanguage": site.language,
+  "author": { "@type": "Person", "name": site.author.name },
+  "publisher": { "@id": site.app.url + "#organization" },
+  "isPartOf": { "@id": site.url + "#website" },
+  "about": { "@type": "SoftwareApplication", "name": site.app.name, "url": site.app.url, "applicationCategory": "TravelApplication" }
+} | jsonLd | safe }}</script>
+<article class="post">
+  <header class="post-header">
+    <h1>{{ title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+      {%- if updated %} · updated <time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time>{% endif %}
+    </p>
+    {%- if description %}
+    <p class="post-lede">{{ description }}</p>
+    {%- endif %}
+  </header>
+  <div class="post-body">
+    {{ content | safe }}
+  </div>
+  <footer class="post-footer">
+    <p><a href="/">← All posts</a> · <a href="{{ site.app.url }}">Try {{ site.app.name }}</a></p>
+  </footer>
+</article>
