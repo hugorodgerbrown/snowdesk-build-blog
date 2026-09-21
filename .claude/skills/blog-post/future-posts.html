@@ -126,6 +126,41 @@
     font-size: 0.93rem;
   }
 
+  .exists {
+    background: var(--chip);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+  }
+  .exists b {
+    color: var(--chip-ink);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .exists a { color: var(--accent); }
+
+  .group {
+    margin: 48px 0 8px;
+    padding-top: 28px;
+    border-top: 2px solid var(--ink);
+  }
+  .group h2 {
+    margin: 0 0 8px;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+  }
+  .group p {
+    margin: 0;
+    color: var(--ink-soft);
+    max-width: 38rem;
+  }
+
   .sources {
     border-top: 1px solid var(--rule);
     padding-top: 12px;
@@ -181,28 +216,212 @@
   <span class="count">21 posts · compiled 21 September 2026</span>
 </header>
 
+<div class="group">
+  <h2>Already written</h2>
+  <p>These exist as finished explainers, published as Artifacts. They are the
+  best material here and the model for everything below: a feature walked end to
+  end, with figures drawn for the argument rather than decoration. Porting one is
+  an editing job, not a writing job — check the facts still hold, fit it to the
+  blog's typography, and mind the constraint noted on each.</p>
+</div>
+
+<article>
+  <span class="area">Routes</span>
+  <h2>From GPX to line</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/LrcourJqZ8Ag7YqLVStue3">claude.ai/artifact/LrcourJqZ8Ag7YqLVStue3</a> — complete, with an annotated GPX file, a height-profile figure and a thinning diagram. Static HTML and inline SVG throughout, so it ports without touching the blog's no-JavaScript rule.</p>
+  <p class="hook">You choose a file. A moment later there is a line on the map and
+  a handful of figures beside it. The article is everything in between.</p>
+  <p>What the file actually holds, which parts are read, what is worked out, what
+  is thrown away, and what finally gets drawn. Two rules carry it. <em>Measure
+  first, thin afterwards</em> — distance and climb are taken over every recorded
+  point before any are discarded, because a thinned line cuts corners and would
+  make every route quietly shorter and flatter. And <em>unknown is not zero</em>
+  — a file with no heights yields no climb figure rather than "0 m", because
+  those are different facts to someone planning a day out.</p>
+  <p>The thinning section is the best part: Douglas–Peucker with a tolerance that
+  is not chosen but found, doubled from about a metre until the track fits under
+  the cap. It works because the algorithm returns a subsequence rather than a
+  redrawing, so every surviving point brings its own recorded height and nothing
+  is interpolated. And the file itself is never kept, which costs something real
+  — a route already imported can never be re-read under better rules.</p>
+  <p class="sources"><b>Sources</b>the artifact · apps/routes/ · docs/decisions/gpx-uploads-are-parsed-not-stored.md</p>
+</article>
+
+<article>
+  <span class="area">Bulletins</span>
+  <h2>What actually changes in a bulletin</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/GULVjFKkYsFLrrFpSWqvhT">claude.ai/artifact/GULVjFKkYsFLrrFpSWqvhT</a> — complete, built on one region's full season. <b>Port needs work:</b> the day-by-day season strip uses a JavaScript hover tooltip, and the blog allows no client-side JavaScript except JSON-LD. The same per-day detail renders statically as SVG <code>&lt;title&gt;</code> elements or <code>title</code> attributes, which browsers surface on hover with no script.</p>
+  <p class="hook">Snowdesk is about to start telling people when the bulletin for
+  a place they follow changes. Before writing that notification, it is worth
+  knowing what a change actually is.</p>
+  <p>One region, one full season: 296 bulletins across 189 days. The headline
+  danger rating moved on 13.8% of them. On the other 86% a notification keyed to
+  the rating has nothing to say — and on two days in three of those, it would be
+  wrong to say nothing, because something in the bulletin did change.</p>
+  <p>What makes it a strong article is that the argument is made from the data
+  rather than asserted. The season strip puts the published rating above what
+  changed beneath it, and the two bands visibly disagree: long unbroken stretches
+  of orange over a lower band that never sits still. The conclusion — that "the
+  rating changed" is the wrong trigger for a notification — is something the
+  reader reaches before being told.</p>
+  <p class="sources"><b>Sources</b>the artifact · SNOW-937 · apps/bulletins/</p>
+</article>
+
+<article>
+  <span class="area">Map</span>
+  <h2>Inside the Snowdesk map</h2>
+  <p class="exists"><b>Written, in part</b><a href="https://claude.ai/artifact/U9McxiwnA2p6zJzmmKs4AV">claude.ai/artifact/U9McxiwnA2p6zJzmmKs4AV</a> — sections 01–07 are a finished explainer, written for engineers who don't write JavaScript. Sections 08–11 are an internal review cycle with findings and ticket numbers, and come out. Everything is static HTML and inline SVG.</p>
+  <p class="hook">A web map is not a picture, and nothing in the codebase draws
+  anything.</p>
+  <p>The explainer half opens on that idea and earns it: the rendering library
+  takes a description — sources and layers — and resolves it to WebGL itself, so
+  every piece of map code is one of four verbs. Paint rules are data, not
+  callbacks, which is why colouring 149 regions costs nothing.</p>
+  <p>Then the trick that makes the season scrubber feel instant: separate the
+  shape of a thing from what is currently true about it. The geometry is uploaded
+  once; changing day is 149 small writes into a side table and no network at all.
+  It has a sharp edge the article does not hide — that side table lives with the
+  source, so swapping the basemap destroys it and the map goes grey, which is why
+  a basemap picker is 500 lines rather than 50.</p>
+  <p>It also has the best cautionary tale in the collection. The map's 82 script
+  files share one namespace and load order is the dependency graph. One module
+  read a global that nothing ever assigned, so every guard around it took the
+  "not ready" branch, forever. Nothing threw, nothing logged, the feature simply
+  never worked — and a linter now fails the build on any read of a name nothing
+  assigns.</p>
+  <p class="sources"><b>Sources</b>the artifact, §01–07 · docs/map-and-api.md · static/js/map*.js</p>
+</article>
+
+<article>
+  <span class="area">Routes</span>
+  <h2>Anatomy of a route</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/HWyvR2F6KzmzVi1PQdcwBd">claude.ai/artifact/HWyvR2F6KzmzVi1PQdcwBd</a> — complete, and the strongest of the set. <b>Port needs work:</b> it carries 16 published files, mostly real screenshots of the running app; those images have to come with it. The exploded layer stack is CSS transforms, no JavaScript.</p>
+  <p class="hook">A saved route started as a line on the map. It now carries six
+  kinds of information about the ground it crosses, packed into a few pixels of
+  width. The article takes it apart one layer at a time.</p>
+  <p>Track, then the steepness of the terrain under it, then rings where the
+  slope above could release onto you, then the passages where a slip would not
+  stop, then arrows for the way the ground falls, then the day's bulletin against
+  your line. Every picture is a real screenshot with every other layer switched
+  off, so each one shows exactly what that layer adds.</p>
+  <p>Two rules open it and they look contradictory until you see the principle.
+  <em>Steepness comes from the ground, never from the track</em> — a skin track
+  zigzagging up a 38° face rises about 15° along its own length, so colouring by
+  the track's gradient would make a serious slope look easy. <em>Height comes
+  from the track, never from the ground</em> — where the skier is, is exactly
+  what a GPX records. Take each figure from the thing that actually measures it.</p>
+  <p>The closing table is the part to keep whatever else is cut: what a missing
+  mark means, and what it never means. No rings does not mean a safe route. Grey
+  dashes mean the terrain grid had no answer, never gentle ground. Every mark
+  says "look here" and none says "you're fine".</p>
+  <p class="sources"><b>Sources</b>the artifact · apps/routes/services/ · docs/decisions/ (fall line, slope segments, terrain-unknown-is-a-reason)</p>
+</article>
+
+<article>
+  <span class="area">Design</span>
+  <h2>Four ways to say dry</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/Pks4K181hbm9p8H1bydUox">claude.ai/artifact/Pks4K181hbm9p8H1bydUox</a> — complete, with live reproductions of the real card rendered in the app's own tokens. Static HTML and CSS. <b>Note:</b> it is written as a design proposal with ticket references; a post keeps the sweep and the reasoning and drops the proposal framing.</p>
+  <p class="hook">Every problem card on a bulletin page stated its category four
+  separate times. Across 9,614 of them in production, one of those four had never
+  once been the only one speaking.</p>
+  <p>This is the article about taking something away, which is rarer and more
+  interesting than the ones about adding. The method is what makes it: rather
+  than arguing from taste, it sweeps the entire production archive and counts.
+  Every card already names its category in its title — 9,614 out of 9,614. The
+  day never splits on 96% of pages. Four in five pages carry exactly one card, so
+  both labels are distinguishing a set of one.</p>
+  <p>Then it turns the space that frees up into a second argument: the danger
+  level is the most scannable thing on the page and it was spending four pixels.
+  Four treatments are drawn at all five levels — because a scale is not uniform,
+  and something that reads well at Considerable can vanish at Low or fail
+  contrast at High — with the contrast ratios measured rather than asserted, and
+  the runner-up explained as carefully as the winner.</p>
+  <p class="sources"><b>Sources</b>the artifact · src/css/main.css · apps/bulletins/services/render_model.py</p>
+</article>
+
+<article>
+  <span class="area">Offline</span>
+  <h2>Inside the boundary, everything</h2>
+  <p class="exists"><b>Written, as a proposal</b><a href="https://claude.ai/artifact/FGA9AGEkQkXiGP3HKfvfyq">claude.ai/artifact/FGA9AGEkQkXiGP3HKfvfyq</a> — one large SVG figure and a tight argument, all static. <b>Port needs work:</b> it is a scoping document, organised around three tickets in dependency order. A post keeps the contract, the two halves and the bug it turned up, and drops the ticket chain.</p>
+  <p class="hook">A downloaded area stops being a bag of tiles when its boundary
+  becomes a promise: inside it, everything; outside it, whatever happens to be
+  there.</p>
+  <p>The best thing here is watching one asymmetry delete most of the hard work.
+  Under-fetching is the only real defect — a bulletin someone needed and does not
+  have. Over-fetching is not, because the content is kilobytes against tiles
+  measured in megabytes. That single observation removes the need for per-area
+  filtering, for any polygon geometry (a rectangle test can only over-include,
+  which is the correct side to fail on) and for deciding which day matters. The
+  acceptance test becomes a property rather than a list.</p>
+  <p>Then the distinction the design had never drawn: an area has two halves that
+  age differently. Tiles, style, sprites and terrain are a fixed grid over fixed
+  ground and cannot go stale. Bulletins, weather and observations are new every
+  day. Conflating them is why a download made on Tuesday is quietly out of date
+  by Thursday with nothing broken and nothing deleted.</p>
+  <p>It also ends on something worth the whole piece: the investigation turned up
+  that the app could show any day in its history and could not show tomorrow —
+  not for want of data, which was already on the device, but because two
+  functions that take a bound as a parameter were being handed the clock instead
+  of the data.</p>
+  <p class="sources"><b>Sources</b>the artifact · static/js/basemap_download_core.js · docs/decisions/inside-the-boundary-is-complete.md</p>
+</article>
+
 <article>
   <span class="area">Bulletins</span>
   <h2>The sentence at the top of every bulletin</h2>
-  <p class="hook">Every bulletin page opens with a line saying what kind of day
-  it is. There are eighty of them, and a person wrote every one.</p>
-  <p>The post walks the three axes that pick a sentence: whether the danger is
-  static, rising, easing or shifting; what level the day lands on; and whether
-  its problems leave evidence on the surface or are buried where field craft
-  cannot read them. Four by five by four is eighty cells, hand-authored, with no
-  generic fallback — an unhandled combination would be the same failure the
-  matrix exists to fix.</p>
-  <p>The reasons arrive inside the walk. Why hand-authored rather than
-  generated: the five strings it replaced went out on 4,300 pages, and
-  "persistent or gliding-snow problems can mask the real risk" appeared whether
-  the problem was persistent weak layers or gliding snow, whether the danger was
-  2 or 3, and whether it held all day or doubled by mid-afternoon. Why a rising
-  day names a transition clause instead of both levels: Swiss ratings can move
-  on a subdivision without the digit changing, which happens on 45 of the 211
-  changing days in the archive, and naming both ends produces "moderate this
-  morning, moderate by afternoon".</p>
-  <p class="sources"><b>Sources</b>docs/day-summary.md · docs/day_character_rules_spec.md · apps/bulletins/services/day_summary.py · apps/bulletins/services/render_model.py</p>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/3tZpaKus3rHgbEtjVDv7Uc">claude.ai/artifact/3tZpaKus3rHgbEtjVDv7Uc</a> — all eighty sentences laid out with their real archive counts. Static HTML. <b>Port needs work:</b> it is a copy-review sheet for editing the matrix, so it ends on rules for authors. A post keeps the findings and shows a sample of the cells rather than all eighty.</p>
+  <p class="hook">Every bulletin page opens with a sentence telling you what kind
+  of day it is. There are eighty of them, and a person wrote every one.</p>
+  <p>Three axes choose the sentence: whether the danger is static, rising,
+  easing or shifting; the level it reaches; and whether the day's problems leave
+  evidence on the surface or are buried where field craft cannot read them. Four
+  by five by four is eighty cells, hand-authored, with no generic fallback,
+  because an unhandled combination would be the same failure the matrix exists to
+  fix.</p>
+  <p>What the artifact adds beyond the mechanism is what fell out of counting.
+  Only 30 of the 80 cells have ever been used — the rest are written against days
+  the archive has not yet produced. 96.4% of days never change at all. And the
+  finding worth building the post around: <em>nothing ever improves</em>. All 22
+  days whose rating fell did so by swapping a dry problem for wet snow, so the
+  number drops while the hazard changes character, and not one sentence in eighty
+  can offer the afternoon as the safer half.</p>
+  <p>Why hand-authored rather than generated: the five strings this replaced went
+  out on 4,300 pages, and "persistent or gliding-snow problems can mask the real
+  risk" appeared whether the problem was persistent weak layers or gliding snow,
+  whether the danger was 2 or 3, and whether it held all day or doubled by
+  mid-afternoon.</p>
+  <p class="sources"><b>Sources</b>the artifact · docs/day-summary.md · apps/bulletins/services/day_summary.py</p>
 </article>
+
+<article>
+  <span class="area">Product</span>
+  <h2>Two documents and a map</h2>
+  <p class="exists"><b>Written, as a proposal</b><a href="https://claude.ai/artifact/N2m5BZ77Tfc92rStDxmHed">claude.ai/artifact/N2m5BZ77Tfc92rStDxmHed</a> — every route and every entity with a verdict, verified against the working tree. Static HTML. <b>Port needs work:</b> it is written as a proposal and has since shipped, so a post is written in the past tense and can say how it turned out.</p>
+  <p class="hook">Only two things on Snowdesk are read at length, and both are
+  dated documents with an issuer. Everything else is a way of getting to one of
+  them.</p>
+  <p>The article applies that one sentence to every URL the site has, and the
+  discipline is the point: a thesis is cheap until you make it adjudicate every
+  case. Each route gets one of four verdicts — stays a page, becomes a layer or
+  sheet on the map, is removed, or is new — with the reasoning next to it. Then
+  the same treatment for every entity, which surfaces the real finding: the two
+  documents were under-surfaced and the region was over-surfaced.</p>
+  <p>The exceptions are where it earns its keep. Account settings survives
+  because account mechanics are not map objects. The resort page survives, and
+  the article says plainly that this is a marketing call rather than an
+  architectural one — people search "Verbier avalanche", not "CH-4115" — and that
+  it should be decided deliberately rather than inherited. It also ends on the
+  honest gap: the thesis needs a region to be pinnable on the map, and that
+  affordance did not exist.</p>
+  <p class="sources"><b>Sources</b>the artifact · docs/site-structure.md · docs/decisions/two-documents-and-a-map.md</p>
+</article>
+
+<div class="group">
+  <h2>From the repo docs</h2>
+  <p>Ideas rather than drafts, each drawn from an explainer in the app repo's
+  <code>docs/</code>. These need writing from the source, following the model
+  above.</p>
+</div>
 
 <article>
   <span class="area">Offline</span>
@@ -321,25 +540,6 @@
   heading claims more than it knows. The forecaster's own pan-regional prose
   stays, because that claim is one the forecaster actually made.</p>
   <p class="sources"><b>Sources</b>docs/weather-surfaces.md · docs/decisions/weather-is-one-immutable-location-row.md · apps/weather/</p>
-</article>
-
-<article>
-  <span class="area">Product</span>
-  <h2>Two documents and a map</h2>
-  <p class="hook">Snowdesk has two pages you read and one application you use.
-  Everything else was deleted, or turned into a redirect.</p>
-  <p>The post explains an information architecture decided late and applied
-  ruthlessly: a bulletin page and a weather page are documents; the map is the
-  app; and anything a visitor interacts with — pins, routes, reports, the
-  regions they follow — is a layer or a sheet on the map, not a page of its own.
-  Every URL that used to render one of those lists is now a permanent redirect
-  that opens the corresponding sheet.</p>
-  <p>Good material for the exceptions, which are where an IA rule earns its
-  keep. Account settings survives as a page because account mechanics are not
-  map objects. The offline report survives as a page, and is public, because it
-  is most useful to someone signed out with no signal. And no sequential
-  database id appears in any URL or public feed.</p>
-  <p class="sources"><b>Sources</b>docs/site-structure.md · docs/user-journeys.md · docs/decisions/two-documents-and-a-map.md · docs/decisions/no-integer-pks-in-urls.md</p>
 </article>
 
 <article>
