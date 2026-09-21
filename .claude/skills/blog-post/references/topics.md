@@ -17,7 +17,29 @@ once its post is published.
 The app repository is at `/Users/hugo/Projects/snowdesk-data-pipeline`. Read
 only. Everything below is a path inside it.
 
-## Start from an explainer
+## The published explainers come first
+
+Hugo has written a series of explainers as published Artifacts — *From GPX to
+Line*, *Anatomy of a Route*, *Inside the Snowdesk Map*, *What Changes in a
+Bulletin*, and others. They are the best material available and the model for
+what a post is: one feature walked end to end, with figures drawn to carry the
+argument rather than to decorate it. The backlog links each one.
+
+List them with the Artifact tool (`action: "list"`), and read one before
+writing anything modelled on it. Two things to watch when porting:
+
+- **Check the facts still hold.** Some were written months ago and the app has
+  moved. The code settles it.
+- **Mind the blog's constraint.** Posts allow no client-side JavaScript except
+  JSON-LD. Most of these are static HTML and inline SVG and port directly, but
+  any interactive piece — a hover tooltip, a drill-down — has to become static.
+  An SVG `<title>` or a `title` attribute gives hover text with no script.
+
+Some carry published image files, which have to come across with them. Some are
+written as proposals with ticket numbers; a post drops that framing and, where
+the work has since shipped, is written in the past tense.
+
+## Then the repo's own explainers
 
 `docs/` holds a write-up for most parts of the app, and these are the proto
 posts — a post is one of them rewritten for someone outside the project. They

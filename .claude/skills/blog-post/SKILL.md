@@ -20,11 +20,16 @@ post deploys the moment that flag goes, so publishing is his call, not yours.
 ## What a post is
 
 A post lifts the lid on one feature, or one area of the app: what it does for
-someone using Snowdesk, and how it was built. The explainer docs in the app
-repo's `docs/` are the model — `render-model.md`, `mutation-queue.md`,
-`day-summary.md`. Read one and you know how that part works. A post is the
-public version of that: the same walk through the same machinery, written for
-someone outside the project.
+someone using Snowdesk, and how it was built.
+
+The model is the series of explainers Hugo has already published as Artifacts —
+*From GPX to Line*, *Anatomy of a Route*, *Inside the Snowdesk Map*. Read one
+before writing, and match it: one feature followed end to end, real screenshots
+or figures drawn to carry the argument, and the honest limits stated rather than
+left for the reader to discover. Several are finished and need porting rather
+than writing; the backlog says which. The app repo's `docs/` explainers —
+`render-model.md`, `mutation-queue.md`, `day-summary.md` — are the raw material
+for the ones not yet written.
 
 **The explanation is the content.** Decisions belong inside it, as the reasons a
 part works the way it does, not as the subject. A reader wants to know how the
