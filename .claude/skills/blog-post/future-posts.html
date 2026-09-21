@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Future posts</title>
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --surface: #ffffff;
+    --ink: #1c1b19;
+    --ink-soft: #55524d;
+    --ink-faint: #8a857e;
+    --rule: #e4e0da;
+    --accent: #1f5e8c;
+    --chip: #eef1f4;
+    --chip-ink: #2c4a5e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17181a;
+      --surface: #1f2124;
+      --ink: #eceae6;
+      --ink-soft: #b3aea6;
+      --ink-faint: #85807a;
+      --rule: #32353a;
+      --accent: #7fb6dd;
+      --chip: #262b31;
+      --chip-ink: #9dc4dd;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17181a;
+    --surface: #1f2124;
+    --ink: #eceae6;
+    --ink-soft: #b3aea6;
+    --ink-faint: #85807a;
+    --rule: #32353a;
+    --accent: #7fb6dd;
+    --chip: #262b31;
+    --chip-ink: #9dc4dd;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0 16px 96px;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 44rem; margin: 0 auto; }
+
+  header.page {
+    padding: 56px 0 32px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 8px;
+  }
+  header.page h1 {
+    margin: 0 0 12px;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  header.page p {
+    margin: 0 0 10px;
+    color: var(--ink-soft);
+    max-width: 38rem;
+  }
+  header.page p:last-child { margin-bottom: 0; }
+
+  .count {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 22px 22px 18px;
+    margin: 20px 0;
+  }
+
+  article h2 {
+    margin: 0 0 4px;
+    font-size: 1.18rem;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+
+  .area {
+    display: inline-block;
+    background: var(--chip);
+    color: var(--chip-ink);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+
+  .hook {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-size: 1.02rem;
+  }
+  .hook em { font-style: italic; color: var(--ink-soft); }
+
+  article p { margin: 0 0 12px; color: var(--ink-soft); }
+  article p:last-of-type { margin-bottom: 16px; }
+
+  .note {
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+  }
+
+  .sources {
+    border-top: 1px solid var(--rule);
+    padding-top: 12px;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    line-height: 1.7;
+    word-break: break-word;
+  }
+  .sources b {
+    font-family: inherit;
+    color: var(--ink-faint);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  footer.page {
+    border-top: 1px solid var(--rule);
+    margin-top: 40px;
+    padding-top: 24px;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+  }
+  footer.page h2 {
+    font-size: 0.95rem;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  footer.page ul { margin: 0 0 18px; padding-left: 20px; }
+  footer.page li { margin-bottom: 6px; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <h1>Future posts</h1>
+  <p>A backlog for <b>build.snowdesk.info</b>. Each entry is one feature area of
+  the Snowdesk app, walked end to end: what a reader can see, how it is built,
+  and the choices explained at the point they come up.</p>
+  <p>Every entry is drawn from an explainer in the app repo's <code>docs/</code>
+  and names the code to read. Ordering is immaterial — pick whichever suits the
+  week, then vary the area next time.</p>
+  <span class="count">14 posts · compiled 21 September 2026</span>
+</header>
+
+<article>
+  <span class="area">Bulletins</span>
+  <h2>The sentence at the top of every bulletin</h2>
+  <p class="hook">Every bulletin page opens with a line saying what kind of day
+  it is. There are eighty of them, and a person wrote every one.</p>
+  <p>The post walks the three axes that pick a sentence: whether the danger is
+  static, rising, easing or shifting; what level the day lands on; and whether
+  its problems leave evidence on the surface or are buried where field craft
+  cannot read them. Four by five by four is eighty cells, hand-authored, with no
+  generic fallback — an unhandled combination would be the same failure the
+  matrix exists to fix.</p>
+  <p>The reasons arrive inside the walk. Why hand-authored rather than
+  generated: the five strings it replaced went out on 4,300 pages, and
+  "persistent or gliding-snow problems can mask the real risk" appeared whether
+  the problem was persistent weak layers or gliding snow, whether the danger was
+  2 or 3, and whether it held all day or doubled by mid-afternoon. Why a rising
+  day names a transition clause instead of both levels: Swiss ratings can move
+  on a subdivision without the digit changing, which happens on 45 of the 211
+  changing days in the archive, and naming both ends produces "moderate this
+  morning, moderate by afternoon".</p>
+  <p class="sources"><b>Sources</b>docs/day-summary.md · docs/day_character_rules_spec.md · apps/bulletins/services/day_summary.py · apps/bulletins/services/render_model.py</p>
+</article>
+
+<article>
+  <span class="area">Offline</span>
+  <h2>Tapping save with no signal</h2>
+  <p class="hook">You pin a spot on the map in a lift queue with one bar, and it
+  saves.</p>
+  <p>The post follows that tap. The request goes into an outbox in the browser's
+  own database rather than to the network; a half-opacity marker appears
+  immediately so the save is visible at once; the queue replays it when the
+  signal returns, at which point the optimistic pin is swapped for the real
+  server one.</p>
+  <p>The failure paths are the interesting part. An idempotency key is minted
+  once when the row is queued and sent unchanged on every replay, so a reply
+  lost on a flaky connection cannot create the pin twice. Hitting the favourites
+  cap offline returns a 409, which the queue treats as permanent rather than
+  retryable, and the pending pin is withdrawn. Queued rows are partitioned by
+  account, so signing out cannot replay one person's saves as another's.</p>
+  <p class="sources"><b>Sources</b>docs/mutation-queue.md · docs/indexeddb-scaffolding.md · static/js/mutation_queue.js · static/js/favourites.js</p>
+</article>
+
+<article>
+  <span class="area">Bulletins</span>
+  <h2>Three countries, one page</h2>
+  <p class="hook">Switzerland, Austria/Italy and France each publish avalanche
+  bulletins, and no two agree on the format.</p>
+  <p>France serves XML under a different product name entirely and is translated
+  field by field into the standard the other two use, so that by the time a
+  bulletin is stored, all three look the same. The post follows one bulletin
+  from the provider's API to the rendered page.</p>
+  <p>The spine is the render model: at ingest, each bulletin is turned into a
+  pre-computed block of JSON so no template contains derivation logic, stamped
+  with a version so a change to the shape means rebuilding the archive rather
+  than rendering old rows through new code. Presentation-only fields are added
+  later, outside the stored JSON, so they can change without a rebuild. It can
+  close on the fidelity guard and why it exists: one field was fetched,
+  translated, stored and versioned for the project's entire life without any
+  template displaying it, so CI now fails the build if a field the provider
+  published reaches no surface.</p>
+  <p class="sources"><b>Sources</b>docs/render-model.md · docs/meteofrance-mapping.md · apps/bulletins/services/render_model.py · tests/sentinels/fidelity.py</p>
+</article>
+
+<article>
+  <span class="area">Offline</span>
+  <h2>What this device can actually show you</h2>
+  <p class="hook">A user downloaded a region while connected, went underground,
+  and got "this page isn't available offline" — no map, no content, and nothing
+  on the device able to explain why.</p>
+  <p>The post uses that journey as its spine. What makes Snowdesk work offline
+  lives in four stores that know nothing about each other, and each surface
+  reporting on one of them reported only its own half: the downloads sheet knew
+  about tiles, the layers menu knew about data feeds, the reset panel knew about
+  unsent rows. Nothing measured whether the page's own HTML was in the shell
+  cache — or whether it had been cached under a different account, which the
+  service worker refuses to serve and then falls through to the offline page
+  without saying so.</p>
+  <p>Those two unmeasured rows are exactly the ones that produce that symptom.
+  The fix is a report that reads all four stores and gives one verdict with the
+  evidence under it, on a page deliberately left public, because what a device
+  has saved is most worth reading when you are signed out and stuck.</p>
+  <p class="sources"><b>Sources</b>docs/offline-audit.md · docs/offline-map.md · static/js/offline_audit.js · static/js/sw.js</p>
+</article>
+
+<article>
+  <span class="area">Map</span>
+  <h2>A map that knows what day it is</h2>
+  <p class="hook">The whole app is one map. Drag the slider along the bottom and
+  the colours change as you scrub back through the season.</p>
+  <p>The post covers the choropleth of avalanche regions, the scrubber that
+  animates a whole winter, and what happens when you tap: an outline, a season
+  ribbon, a readout chip, and deliberately <em>no</em> popup — the popup covered
+  the terrain the visitor had just tapped, so the whole state machine was
+  deleted. Its endpoint survived and now feeds the region panel instead, which
+  is a good small story about the difference between a surface and the data
+  behind it.</p>
+  <p>There is also an honest engineering thread: the map was one 9,192-line
+  JavaScript file, split along the eleven seams it already contained. These are
+  classic scripts sharing one global scope, so the order of the script tags is
+  load-bearing — three declaration files before the boot file, nine surface
+  files after it.</p>
+  <p class="sources"><b>Sources</b>docs/map-and-api.md · docs/map-page-functional-spec.md · static/js/map.js and the map_*.js set</p>
+</article>
+
+<article>
+  <span class="area">Bulletins</span>
+  <h2>The calendar tile that splits in half</h2>
+  <p class="hook">Open the calendar on a bulletin page and some tiles are one
+  colour, some are two, split on the diagonal.</p>
+  <p>A two-colour tile is a day where the afternoon is worse than the morning.
+  The post explains where that comes from: one denormalised row per region per
+  day, computed at ingest, so the month grid renders without reading a single
+  bulletin at request time. Picking the authoritative bulletin for a day is its
+  own small puzzle — a morning issue beats the previous evening's, and an
+  evening issue belongs to tomorrow, not today.</p>
+  <p>It closes on the rule every compressed view obeys: a chip, a calendar tile
+  and a map colour always show the day's <em>peak</em> rating, never the morning
+  one, because that is what the SLF's own interpretation guide says to read when
+  you take one number for a day. Showing the lower number would under-represent
+  the hazard on exactly the days that deteriorate.</p>
+  <p class="sources"><b>Sources</b>docs/calendar.md · docs/compressed-views-rating-rule.md · apps/bulletins/services/day_rating.py</p>
+</article>
+
+<article>
+  <span class="area">Weather</span>
+  <h2>Where the weather goes, and where it deliberately doesn't</h2>
+  <p class="hook">Snowdesk shows a forecast on a resort page, on a saved pin, on
+  a location page and on the map — and, on the one page you would most expect
+  it, refuses to.</p>
+  <p>The data is one row per location per day, never rewritten once that day is
+  past, so the app can always say what was known at the time rather than what
+  turned out to be true. The post walks the four surfaces that read it and what
+  each one asks for: today, today, a chosen date, and whatever date the map is
+  scrubbed to.</p>
+  <p>The refusal is the best part. The bulletin page used to carry a weather row
+  taken from the region's centroid, and it was removed: a warning region spans
+  thousands of metres of vertical, so a single point presented under a regional
+  heading claims more than it knows. The forecaster's own pan-regional prose
+  stays, because that claim is one the forecaster actually made.</p>
+  <p class="sources"><b>Sources</b>docs/weather-surfaces.md · docs/decisions/weather-is-one-immutable-location-row.md · apps/weather/</p>
+</article>
+
+<article>
+  <span class="area">Product</span>
+  <h2>Two documents and a map</h2>
+  <p class="hook">Snowdesk has two pages you read and one application you use.
+  Everything else was deleted, or turned into a redirect.</p>
+  <p>The post explains an information architecture decided late and applied
+  ruthlessly: a bulletin page and a weather page are documents; the map is the
+  app; and anything a visitor interacts with — pins, routes, reports, the
+  regions they follow — is a layer or a sheet on the map, not a page of its own.
+  Every URL that used to render one of those lists is now a permanent redirect
+  that opens the corresponding sheet.</p>
+  <p>Good material for the exceptions, which are where an IA rule earns its
+  keep. Account settings survives as a page because account mechanics are not
+  map objects. The offline report survives as a page, and is public, because it
+  is most useful to someone signed out with no signal. And no sequential
+  database id appears in any URL or public feed.</p>
+  <p class="sources"><b>Sources</b>docs/site-structure.md · docs/user-journeys.md · docs/decisions/two-documents-and-a-map.md · docs/decisions/no-integer-pks-in-urls.md</p>
+</article>
+
+<article>
+  <span class="area">Data</span>
+  <h2>How far back the bulletins go</h2>
+  <p class="hook">The Swiss avalanche service publishes a bulletin every day and
+  has done for decades. You can have about two and a half seasons of them.</p>
+  <p>A short post about finding the edge of a public API. Walking the bulletin
+  list endpoint by offset, the responses stop at around 900 entries — not with
+  an error, not with a pagination boundary, but with an empty array, which is
+  the kind of edge you only find by looking. The oldest bulletin retrieved lines
+  up with the start of a season, so the cap reads as season-aligned rather than
+  arbitrary. Every plausible archive path returns a 404.</p>
+  <p>The conclusion is the useful part for anyone building on public data: a
+  "mirror the whole dataset" project is bounded to roughly what a season-to-date
+  run already fetches, and everything older lives somewhere that is not an API
+  at all.</p>
+  <p class="note">The source doc is marked historical and its figures are from a
+  probe on 1 May 2026. Re-run the probe before publishing, and write the post
+  around dated findings rather than current facts.</p>
+  <p class="sources"><b>Sources</b>docs/slf-api-history.md · apps/bulletins/services/slf_fetcher.py</p>
+</article>
+
+<article>
+  <span class="area">Accounts</span>
+  <h2>An account is an email address proven reachable</h2>
+  <p class="hook">No password required, no third-party auth library, and for a
+  long time no account page worth the name.</p>
+  <p>The post covers a deliberately small identity model: sign in by clicking a
+  signed link in an email, with a password or a passkey as later options rather
+  than the front door. Signing in unlocks the things saved on the map — pins,
+  routes, reports, followed regions — and the only account page left is
+  settings.</p>
+  <p>The good story inside it is what happened to subscriptions. Accounts used
+  to own subscription rows, captured by a form on every bulletin page. Nothing
+  ever sent a bulletin off one: every email the app sends is transactional. So a
+  subscription was a bookmark on a region wearing the wrong name, and bookmarks
+  belong on the map — they became pins, the old rows were converted, and the
+  table was dropped in its own deploy.</p>
+  <p class="sources"><b>Sources</b>docs/accounts.md · apps/accounts/ · docs/decisions/encrypted-email-field.md</p>
+</article>
+
+<article>
+  <span class="area">Offline</span>
+  <h2>A service worker that waits to be asked</h2>
+  <p class="hook">The second time you open any page it paints instantly, and
+  nobody asked you to install anything.</p>
+  <p>The post explains the shell: a small service worker registered on every
+  public page, caching the app's own assets on first visit so that offline
+  capability accrues from ordinary use rather than an opt-in. Then the part most
+  PWAs get wrong — a new worker deliberately does <em>not</em> take over on
+  install. It sits waiting until the user clicks Reload in a banner, because
+  swapping the code under a page someone is reading is a worse failure than
+  serving yesterday's build for another minute.</p>
+  <p>Two details worth the detour: the cache version is derived from a hash of
+  the shell's contents rather than bumped by hand, so it cannot be forgotten;
+  and the update banner names the build it is replacing, which turns "why is
+  this thing asking me to reload" into an answerable question.</p>
+  <p class="sources"><b>Sources</b>docs/offline-map.md · docs/offline-first.md · static/js/sw.js · apps/core/sw_shell.py</p>
+</article>
+
+<article>
+  <span class="area">Platform</span>
+  <h2>Answering a language model without being scraped</h2>
+  <p class="hook">Ask Claude about avalanche conditions in Valais and it can
+  query Snowdesk directly, instead of reading a rendered page and guessing.</p>
+  <p>The post describes a small read-only MCP server: fifteen tools over regions,
+  bulletins, danger-rating history and location weather, advertised from
+  <code>/llms.txt</code>. It is a good subject because the implementation is so
+  much smaller than the ecosystem around it suggests — plain JSON-RPC over a
+  single Django view, no SDK and no async stack, because the spec permits a
+  POST-only endpoint and the app is WSGI.</p>
+  <p>Room for one genuinely useful detail for anyone building the same thing: the
+  endpoint answers on both the URL with a trailing slash and the one without,
+  because a client POSTs to exactly the URL a user typed, and Django's
+  slash-appending redirect would drop the request body on the way.</p>
+  <p class="sources"><b>Sources</b>docs/mcp-server.md · apps/mcp_server/views.py · apps/mcp_server/urls.py · apps/public/views.py (the llms.txt view)</p>
+</article>
+
+<article>
+  <span class="area">Platform</span>
+  <h2>Phoning home when everything is broken</h2>
+  <p class="hook">The failures worth knowing about are the ones that break the
+  thing you would use to report them.</p>
+  <p>A broken service worker, a corrupt client database, an evicted cache, a
+  dead push subscription: each leaves a user with an app that misbehaves, and
+  each is invisible to any analytics script that assumes the page works. So the
+  telemetry is owned end to end rather than handed to a third-party library, on
+  an allowlist of named events, with an off switch.</p>
+  <p>The post is about a general principle with a specific instance:
+  observability that depends on the healthy path tells you nothing about the
+  broken one. Useful to anyone running a PWA, and short.</p>
+  <p class="sources"><b>Sources</b>docs/telemetry-pipeline.md · apps/analytics/</p>
+</article>
+
+<article>
+  <span class="area">Domain</span>
+  <h2>How to read an avalanche bulletin</h2>
+  <p class="hook">The danger scale runs one to five, and around half of all
+  avalanche fatalities happen at level three.</p>
+  <p>The way in for a reader who arrives knowing nothing, and the post every
+  other bulletin post can link back to. It covers the five-point European scale,
+  why the steps are not evenly spaced — the jump from 2 to 3 is far bigger than
+  the numbers suggest — the plus/equals/minus subdivisions the Swiss service
+  adds within a level, and how aspect and elevation turn a single number into a
+  statement about particular slopes.</p>
+  <p>It can be grounded in the archive rather than written from the guide alone:
+  across 2,159 bulletins in one season, 54% carried moderate, 35% considerable,
+  5% high, and very high appeared on less than 1%. That distribution is the
+  context a reader needs before any of the app's own choices make sense.</p>
+  <p class="sources"><b>Sources</b>docs/bulletin-guide.md · docs/glossary.md · reference_data/CAAML_SCHEMA.md</p>
+</article>
+
+<footer class="page">
+  <h2>Deliberately not on this list</h2>
+  <ul>
+    <li><b>Web Push.</b> Wired end to end and genuinely interesting — Apple's
+    declarative payloads are rendered by the OS even when the service worker has
+    been evicted — but it is a staff-only spike behind a demo page. Worth a post
+    once it reaches real subscribers.</li>
+    <li><b>Operator and process docs</b> — management commands, deployment,
+    feature flags, worktrees, coding standards. Instructions for running the
+    project; nobody outside it has the problem they solve.</li>
+    <li><b>Anything not shipped.</b> A post describes the app as it was on the
+    day it was written.</li>
+  </ul>
+  <h2>Using this list</h2>
+  <p>Pick an entry, then read its sources before writing — the docs carry
+  <code>last-reviewed</code> dates and the code is the tiebreaker. Record what
+  the post drew on in its <code>sources:</code> front matter so the next one does
+  not repeat it, and vary the area: offline is the most heavily documented part
+  of the app and will otherwise take every slot.</p>
+</footer>
+
+</div>
+</body>
+</html>
