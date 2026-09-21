@@ -178,7 +178,7 @@
   <p>Every entry is drawn from an explainer in the app repo's <code>docs/</code>
   and names the code to read. Ordering is immaterial — pick whichever suits the
   week, then vary the area next time.</p>
-  <span class="count">14 posts · compiled 21 September 2026</span>
+  <span class="count">21 posts · compiled 21 September 2026</span>
 </header>
 
 <article>
@@ -453,6 +453,137 @@
   <p class="sources"><b>Sources</b>docs/bulletin-guide.md · docs/glossary.md · reference_data/CAAML_SCHEMA.md</p>
 </article>
 
+<article>
+  <span class="area">Data</span>
+  <h2>Every coordinate means something different</h2>
+  <p class="hook">A saved pin, a resort, a field report and a warning region all
+  carry a latitude and a longitude, and you may conclude something different
+  from each.</p>
+  <p>The post is built around one question: for any coordinate on any record,
+  is it exact or approximate, who derived it, and what may you safely read into
+  it? A pin is exact because a person dropped it. A resort's coordinate is exact
+  as a <em>village</em> — it was geocoded from the resort's name, so it is not
+  the summit and not the car park. A region's centre is a polygon centroid and
+  means nothing on the ground. An elevation is a lookup against a terrain model.</p>
+  <p>The sharpest case is a field report, which carries both the position the
+  reporter submitted and the raw fix the device measured. Keeping both is
+  deliberate: the difference between them records how far someone dragged the
+  pin, which is exactly what tells you how much to trust the report. That is a
+  good general lesson about storing provenance beside a value rather than
+  overwriting it.</p>
+  <p class="sources"><b>Sources</b>docs/locations.md · apps/locations/models.py · docs/decisions/location-is-the-primitive.md · docs/decisions/pure-python-point-in-polygon.md</p>
+</article>
+
+<article>
+  <span class="area">Offline</span>
+  <h2>Reading a bug off a phone with no devtools</h2>
+  <p class="hook">A region reports as downloaded and the map is blank. Six things
+  must all be true for it to draw, and on a phone in a valley not one of them is
+  observable.</p>
+  <p>The post starts from a property that sounds like a defect and is not: the
+  map module has 39 places that swallow an error silently, and the service worker
+  has 27. That silence is correct — a failing cache probe must never break the
+  page someone is standing in a lift queue reading — and it is precisely why a
+  broken download looks identical to a working one right up until the map fails
+  to appear.</p>
+  <p>The answer is a trace you can read on the device that produced it: each link
+  in that chain of six writes a line, so the question stops being "is it broken"
+  and becomes "which link". A useful post for anyone shipping a progressive web
+  app, where the hardest failures happen on a device you cannot attach a
+  debugger to.</p>
+  <p class="sources"><b>Sources</b>docs/debug-log.md · static/js/sw.js · static/js/map.js</p>
+</article>
+
+<article>
+  <span class="area">Engineering</span>
+  <h2>Testing an app that has to work with no signal</h2>
+  <p class="hook">Download a region, switch the network off, open the map on a
+  mountain. Do you see a map? None of the normal test layers can answer that.</p>
+  <p>The post explains why a fourth test layer exists and why it deliberately
+  breaks every rule the others enforce. The browser suite that runs on every pull
+  request is capped at a couple of dozen short smoke tests; this one runs for
+  minutes, downloads several hundred real tiles from a live origin, and puts a
+  real network boundary in front of the browser so "offline" means offline rather
+  than a mocked flag.</p>
+  <p>So it runs weekly, off the merge path, against a subject drawn fresh each
+  week — with the draw seeded by the week number, so a red run can be reproduced
+  exactly. The general point is worth making plainly: not every valuable test
+  belongs on the critical path, and the ones that do not still need somewhere to
+  live and a budget of their own.</p>
+  <p class="sources"><b>Sources</b>docs/offline-assurance.md · docs/client-side-tests.md · tests/offline/</p>
+</article>
+
+<article>
+  <span class="area">Design</span>
+  <h2>The colours that are not ours to choose</h2>
+  <p class="hook">Snowdesk has a dark mode. Five of its colours refuse to
+  participate.</p>
+  <p>The danger scale's colours are set by the European avalanche services and
+  mean the same thing on every bulletin in the Alps, so they are theme-invariant:
+  everything else on the page inverts around them, and they stay put. The post
+  uses that as the way into a small design system — tokens declared once,
+  overridden for dark mode, with the regulated ones carved out.</p>
+  <p>Two more rules earn their place. One text colour carries a note saying it
+  sits at 4.67:1 against the page and must not be dimmed further, which is what
+  an accessibility floor looks like when it is written down rather than assumed.
+  And in any row where horizontal space is contested, more than one control
+  collapses into a menu — because past that point the row's own name is what
+  gets squeezed, and the name is what people scan a list by.</p>
+  <p class="sources"><b>Sources</b>docs/design-system.md · src/css/main.css</p>
+</article>
+
+<article>
+  <span class="area">Platform</span>
+  <h2>The strings the extractor cannot see</h2>
+  <p class="hook">Django's translation tooling reads your templates and your
+  Python. It does not read your JavaScript, and it does not tell you so.</p>
+  <p>A short, practical post about a silent failure mode in any server-rendered
+  app with a real client side: a string written as a JavaScript literal never
+  reaches the message catalogue, so it ships in English to every locale and
+  nothing in the build complains. Around 45 had quietly accumulated before they
+  were marshalled into a single server-rendered surface the client reads from.</p>
+  <p>It can close on the other half of the discipline, which is knowing what not
+  to translate: the forecaster's own prose arrives from the provider and is not
+  ours to reword, log lines are for operators, and the staff admin is English by
+  design.</p>
+  <p class="sources"><b>Sources</b>docs/i18n.md · bin/i18n-lint · locale/</p>
+</article>
+
+<article>
+  <span class="area">Engineering</span>
+  <h2>Measuring what production actually serves</h2>
+  <p class="hook">The performance audit was scoring roughly 23,000 lines of
+  JavaScript that no visitor has ever downloaded.</p>
+  <p>A post about a budget measuring the wrong thing. Accessibility and search
+  scores block merge; performance and best practices report. But the audit ran
+  against the source tree, while deployment minifies on the way out — so every
+  number described a version of the site nobody receives, and the one stylesheet
+  in the critical path had no build step touching it at all.</p>
+  <p>The fix is unglamorous and the moral is general: an automated gate is only
+  as useful as the fidelity of what it measures, and the local audit and the
+  deploy have to run the same steps or the gate is theatre.</p>
+  <p class="sources"><b>Sources</b>docs/lighthouse.md · lighthouserc.json · bin/minify-js · bin/minify-css</p>
+</article>
+
+<article>
+  <span class="area">Offline</span>
+  <h2>One database in the browser</h2>
+  <p class="hook">Everything Snowdesk remembers on your device — the outbox, your
+  saved pins, the sync log, the debug trace — lives in one small database with
+  one way in.</p>
+  <p>The post covers the foundation the rest of the client is built on: a single
+  wrapper over IndexedDB exposing exactly one global, loaded first on every page,
+  with a handful of long-lived stores added over time as features needed them.
+  Every store that has ever existed is still created on open and none has ever
+  been removed, which is the cheapest possible answer to migrating data that
+  lives on someone else's phone and may not be opened for a season.</p>
+  <p>There is a nice naming detail to explain: the version number in the database
+  name is a namespace rather than a schema version, and bumping it would mean
+  abandoning everything already on the device. Schema changes go through a
+  separate counter.</p>
+  <p class="sources"><b>Sources</b>docs/indexeddb-scaffolding.md · static/js/db.js</p>
+</article>
+
 <footer class="page">
   <h2>Deliberately not on this list</h2>
   <ul>
@@ -460,9 +591,27 @@
     declarative payloads are rendered by the OS even when the service worker has
     been evicted — but it is a staff-only spike behind a demo page. Worth a post
     once it reaches real subscribers.</li>
-    <li><b>Operator and process docs</b> — management commands, deployment,
-    feature flags, worktrees, coding standards. Instructions for running the
-    project; nobody outside it has the problem they solve.</li>
+    <li><b>Folded into an entry above, not dropped</b> — <code>offline-first.md</code>
+    (into the service-worker post), <code>meteofrance-mapping.md</code> (three
+    countries), <code>day_character_rules_spec.md</code> (the day sentence),
+    <code>map-page-functional-spec.md</code> (the map), <code>user-journeys.md</code>
+    (two documents and a map), <code>query-counts.md</code> (measuring what
+    production serves). Each is a second source for a post rather than a post of
+    its own.</li>
+    <li><b>Operator and process docs</b> — <code>management-commands.md</code>,
+    <code>deployment.md</code>, <code>feature-flags.md</code>,
+    <code>worktrees.md</code>, <code>coding-standards.md</code>,
+    <code>linear-workflow.md</code>, <code>claude-code-hooks.md</code>,
+    <code>testing-scenarios.md</code>, <code>auth-testing-checklist.md</code>,
+    <code>environment-network-allowlist.md</code>,
+    <code>meteofrance-live-ingest.md</code>, <code>async-operations.md</code>.
+    Instructions for running the project; nobody outside it has the problem they
+    solve.</li>
+    <li><b>Reference and internal material</b> — <code>glossary.md</code>,
+    <code>competitors.md</code>, <code>useful-repos.md</code>,
+    <code>churn-report.md</code>, <code>site-banners.md</code>,
+    <code>nav_implementation_spec.md</code>. Lookup tables and internal
+    positioning, with no argument to make to a reader.</li>
     <li><b>Anything not shipped.</b> A post describes the app as it was on the
     day it was written.</li>
   </ul>
