@@ -14,16 +14,18 @@ The reader is technically literate and knows nothing about avalanche forecasting
 They should finish a post able to explain the decision to someone else.
 
 **The default is a draft.** Write `draft: true` in the front matter and leave it
-there. Hugo reads the post and removes the flag when it is ready to publish. A
-post deploys the moment that flag goes, so publishing is his call, not yours.
+there. The editor reads the post and removes the flag when it is ready to
+publish. A post deploys the moment that flag goes, so publishing is their call,
+not yours.
 
 ## What a post is
 
 A post lifts the lid on one feature, or one area of the app: what it does for
 someone using Snowdesk, and how it was built.
 
-The model is the series of explainers Hugo has already published as Artifacts —
-*From GPX to Line*, *Anatomy of a Route*, *Inside the Snowdesk Map*. Read one
+The model is the series of explainers the editor has already published as
+Artifacts — *From GPX to Line*, *Anatomy of a Route*, *Inside the Snowdesk
+Map*. Read one
 before writing, and match it: one feature followed end to end, real screenshots
 or figures drawn to carry the argument, and the honest limits stated rather than
 left for the reader to discover. Several are finished and need porting rather
@@ -62,9 +64,16 @@ a better post than the one you planned.
 
 ## Step 2 — get the facts
 
-The app repository is a sibling checkout at
-`/Users/hugo/Projects/snowdesk-data-pipeline`. Treat it as read-only: never edit
-it, never commit to it.
+The app repository is a checkout of `snowdesk-data-pipeline` sitting beside this
+one. Resolve it once rather than hardcoding a path, so the skill works from a
+worktree and on anyone's machine:
+
+```bash
+APP_REPO="${SNOWDESK_APP_REPO:-$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/../.." && pwd)/snowdesk-data-pipeline}"
+```
+
+Set `SNOWDESK_APP_REPO` if it lives somewhere else. Treat it as read-only:
+never edit it, never commit to it.
 
 Docs in that repo carry `last-reviewed` dates and can lag the code. Read the
 source files a doc points at and let the code settle any disagreement. Specifics
@@ -77,7 +86,9 @@ Three things never leave that repo:
   read them, do not quote them, do not name their values. That Météo-France
   needs an API key is public and fine; the key is not.
 - **`db.sqlite3`.** It holds real user rows. Nothing from it appears in a post.
-- **Anything about a named person** other than Hugo, who writes the blog.
+- **Anything identifying a person** — a name, an email address, or a home
+  directory inside a file path. A post is about the code and needs none of
+  them; write paths relative to a repository root.
 
 If a claim cannot be traced to code, a doc or a commit, either leave it out or
 mark it plainly as an opinion ("we think", "the bet is that").
@@ -112,10 +123,11 @@ the next person writing a post: it records what this one drew on, and is how
 Step 1 checks a topic has not already been used. The layouts ignore it.
 
 **The `editor` shortcode is not yours to use.** Every post carries a byline
-saying Claude wrote it and Hugo edited it, and the editor's note is the one
-place on the page that speaks in Hugo's voice — a correction, a disagreement,
-the context only he has. Writing one yourself puts words in his mouth, so leave
-it out entirely and let him add it during review. It exists in
+saying Claude wrote it and the site author edited it, and the editor's note is
+the one place on the page that speaks in their voice — a correction, a
+disagreement, the context only they have. Writing one yourself puts words in
+their mouth, so leave it out entirely and let them add it during review. It
+exists in
 `eleventy.config.js` and is exercised by the placeholder post:
 
 ```njk
@@ -124,8 +136,8 @@ His comment, as Markdown.
 {% endeditor %}
 ```
 
-Video only ever goes in through the `youtube` shortcode, and only when Hugo has
-given you a real video ID — never invent one, and never commit a video file:
+Video only ever goes in through the `youtube` shortcode, and only when you have
+been given a real video ID — never invent one, and never commit a video file:
 
 ```njk
 {% youtube "VIDEO_ID", "Title", "2026-09-21", "One-sentence description." %}
@@ -144,13 +156,14 @@ a post with a dead link is worse than a post that shipped a week later.
 
 ## Step 6 — hand it over
 
-Commit on a branch, with Claude as author and Hugo as committer:
+Commit on a branch with `--author` set to Claude, which records who wrote the
+change and leaves the committer as whoever is running the session:
 
 ```bash
 git commit --author="Claude <noreply@anthropic.com>" -m "subject"
 ```
 
-Then tell Hugo, in a few lines: what the post argues, which claims you would most
-like a second pair of eyes on, and anything you could not verify. Name the weak
-spots rather than presenting the draft as finished — you read the code quickly
-and he has lived in it.
+Then report back, in a few lines: what the post argues, which claims you would
+most like a second pair of eyes on, and anything you could not verify. Name the
+weak spots rather than presenting the draft as finished — you read the code
+quickly and the editor has lived in it.

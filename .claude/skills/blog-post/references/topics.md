@@ -14,14 +14,15 @@ once its post is published.
 
 ## Where to look otherwise
 
-The app repository is at `/Users/hugo/Projects/snowdesk-data-pipeline`. Read
-only. Everything below is a path inside it.
+The app repository is the `snowdesk-data-pipeline` checkout beside this one,
+resolved as `$APP_REPO` in SKILL.md Step 2. Read only. Every path below is
+relative to its root.
 
 ## The published explainers come first
 
-Hugo has written a series of explainers as published Artifacts — *From GPX to
-Line*, *Anatomy of a Route*, *Inside the Snowdesk Map*, *What Changes in a
-Bulletin*, and others. They are the best material available and the model for
+The site author has written a series of explainers as published Artifacts —
+*From GPX to Line*, *Anatomy of a Route*, *Inside the Snowdesk Map*, *What
+Changes in a Bulletin*, and others. They are the best material available and the model for
 what a post is: one feature walked end to end, with figures drawn to carry the
 argument rather than to decorate it. The backlog links each one.
 
@@ -51,7 +52,7 @@ Each carries a `last-reviewed` date and a `description` line. Skim the
 descriptions to survey what is available:
 
 ```bash
-cd /Users/hugo/Projects/snowdesk-data-pipeline/docs
+cd "$APP_REPO/docs"
 for f in *.md; do echo "$f :: $(sed -n '3p' "$f")"; done
 ```
 
