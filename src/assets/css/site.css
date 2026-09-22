@@ -232,3 +232,35 @@ main {
   font-size: 0.9375rem;
   margin-top: 0.5rem;
 }
+
+/* Tables. Markdown alignment syntax emits inline styles, which
+   html-validate rejects, so tables are left-aligned throughout and a
+   numeric column is simply a column. */
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9375rem;
+}
+
+.post-body th,
+.post-body td {
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.post-body th {
+  color: var(--text-3);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom-color: var(--text-3);
+  white-space: nowrap;
+}
+
+.post-body tbody tr:last-child td {
+  border-bottom: 0;
+}
