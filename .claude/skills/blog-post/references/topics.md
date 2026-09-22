@@ -40,6 +40,19 @@ Some carry published image files, which have to come across with them. Some are
 written as proposals with ticket numbers; a post drops that framing and, where
 the work has since shipped, is written in the past tense.
 
+## The app explains itself in places
+
+Some of the best source material is a feature rather than a document. The map has
+an exploded view at `?layers=exploded` — a ladder of layer sheets, each one a
+photograph of the live renderer — whose group list in
+`static/js/map_exploded.js` is the authoritative answer to "what is on this map",
+better than any prose description of it. `/help/` renders live components rather
+than screenshots, for the same reason.
+
+When a post is about what something looks like, check whether the app already
+shows it. A feature built to explain the product is written by someone who had
+to make it correct, and its code comments carry the failures that shaped it.
+
 ## Then the repo's own explainers
 
 `docs/` holds a write-up for most parts of the app, and these are the proto
