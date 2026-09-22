@@ -16,6 +16,7 @@ title: Building Snowdesk
     <li>
       <a href="{{ post.url }}">{{ post.data.title }}</a>
       <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+      {%- for a in post.data.audience | audienceLabels(post.data.title) %}<span class="audience audience-{{ a.name }}">{{ a.label }}</span>{% endfor %}
       {%- if post.data.description %}
       <p>{{ post.data.description }}</p>
       {%- endif %}

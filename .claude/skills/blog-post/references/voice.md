@@ -1,9 +1,38 @@
 # House style
 
-The blog is written as "we" — the people building Snowdesk — to a reader who
-writes software and has never thought about avalanche forecasting. Explanatory,
-not promotional. The app has a link in the footer of every post; a post does not
+The blog is written as "we" — the people building Snowdesk. Explanatory, not
+promotional. The app has a link in the footer of every post; a post does not
 need to sell anything.
+
+## Writing for the axis you declared
+
+The `audience` in the front matter is not a label applied afterwards. It changes
+the opening, the density, and what counts as evidence.
+
+**Technical.** The reader writes software and has never thought about avalanche
+forecasting, so the domain gets defined in passing and the mechanism gets the
+room. Name real symbols and paths — `Bulletin.render_model`,
+`apps/routes/services/gpx.py` — and show code where a four-line model definition
+carries the argument. Constants, thresholds and complexity are the interesting
+part; say why a number is that number. Assume the reader will go and look, and
+make sure what they find matches what you wrote.
+
+**Product.** The reader uses apps of this kind and is interested in how features
+are designed. Argue from what someone gets and what they are protected from,
+never from internal measures — nobody outside the project cares how many modules
+an app has. Open on a screen, a tap, or a decision a person makes in a lift
+queue. Code is evidence here, not subject: one short block to prove a claim is
+fine, a walk through a module is not. What a feature deliberately does *not* do
+is usually the strongest material, because that is where a real design choice
+shows.
+
+**Both.** Order it so the product half comes first and stands alone. Put the
+mechanism after a heading that plainly signals the shift, so a reader can stop
+there having read a whole piece rather than an abandoned one. Never split the
+difference by being vague in both directions.
+
+A one-line test before writing: name the reader you would most like to email
+this to. If it is two very different people, the post is probably two posts.
 
 ## The shape of a post
 

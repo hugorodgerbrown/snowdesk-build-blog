@@ -302,3 +302,47 @@ main {
 .editor-note > :last-child {
   margin-bottom: 0;
 }
+
+/* Audience labels. A post leans technical or product — see the blog-post
+   skill — and says so. The two colours are distinguishable, but the label
+   text carries the meaning on its own for anyone who cannot tell them apart. */
+.post-audience {
+  margin: 0 0 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.audience {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.05em 0.45em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+.audience-technical {
+  color: #1d6a4f;
+}
+
+.audience-product {
+  color: #8a4a12;
+}
+
+@media (prefers-color-scheme: dark) {
+  .audience-technical {
+    color: #6fc3a0;
+  }
+
+  .audience-product {
+    color: #d8a05a;
+  }
+}
+
+.post-list .audience {
+  margin-left: 0.35rem;
+  vertical-align: 1px;
+}

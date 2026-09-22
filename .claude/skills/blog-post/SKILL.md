@@ -10,8 +10,39 @@ map, weather, routes, trips, and the decisions behind them. The app itself lives
 in a separate repository, so every post is an act of reporting — you go and read
 the code, then explain it.
 
-The reader is technically literate and knows nothing about avalanche forecasting.
-They should finish a post able to explain the decision to someone else.
+## Who reads this
+
+Two audiences, and they arrive from different directions.
+
+**Technical.** People who build software and want to know how this one works.
+They will read a data model, a classifier, a caching rule or a thinning
+algorithm, and they do not know or care about avalanche forecasting until you
+give them a reason to.
+
+**Product.** People who use apps of this kind — mountain trip planning, weather,
+conditions — and want to know how a feature was designed. They will read about
+what a screen shows, what it refuses to show and why, and they have opinions
+about it. They are not reading pseudocode.
+
+The ideal reader sits in the intersection and there are almost none of them. So
+a post leans one way or the other, deliberately, and says which. An algorithm
+post is technical. A post about drawing terrain along a track is product. A few
+are genuinely both, and those are the best ones — but "both" has to be earned by
+serving each side properly, not by writing something halfway that lands with
+neither.
+
+Declare it in the front matter, as one or both values:
+
+```yaml
+audience: [technical]
+audience: [product]
+audience: [technical, product]
+```
+
+The build fails on a missing or unknown value, so the choice cannot be skipped.
+Decide it before writing, not after: it governs what you open on, how much code
+you show, and where the detail goes. [references/voice.md](references/voice.md)
+says how each one reads.
 
 **The default is a draft.** Write `draft: true` in the front matter and leave it
 there. The editor reads the post and removes the flag when it is ready to
@@ -49,6 +80,13 @@ So each post owes the reader three things:
 
 A post that stops after 1 is marketing. One that starts at 3 is a decision
 record with a different file extension.
+
+The audience decides the weighting. A **technical** post spends most of its
+length on 2, and 1 exists to make the reader care. A **product** post spends
+most of its length on 1 and 3 — what the screen says, what it refuses to say —
+and treats 2 as the evidence that the claim is real rather than as the subject.
+A post marked **both** owes each side a full share: a product reader must be
+able to stop before the mechanism and still have read something complete.
 
 ## Step 1 — choose the topic
 
@@ -111,6 +149,7 @@ title reduced to words that will still make sense in a link a year from now.
 title: Weather is one row, and it never changes
 description: One or two sentences. This is the meta description, the lede on the page, the feed summary and the llms.txt entry, so it has to stand alone.
 date: 2026-09-21
+audience: [technical]
 draft: true
 sources:
   - snowdesk-data-pipeline docs/decisions/weather-is-one-immutable-location-row.md
@@ -118,7 +157,7 @@ sources:
 ---
 ```
 
-`title`, `description` and `date` are required by the layouts. `sources` is for
+`title`, `description`, `date` and `audience` are required. `sources` is for
 the next person writing a post: it records what this one drew on, and is how
 Step 1 checks a topic has not already been used. The layouts ignore it.
 

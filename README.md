@@ -34,10 +34,18 @@ npm start          # http://localhost:8080, live reload, drafts included
    title: The map
    description: One or two sentences. Used as the meta description, the lede, the feed summary and in llms.txt.
    date: 2026-10-01
+   audience: [technical]   # or [product], or both — required, build fails without it
    # updated: 2026-11-15   # optional; shown on the post and used as dateModified / lastmod
    # draft: true           # optional; built by `npm start` and CI, never published
    ---
    ```
+
+   `audience` is the axis the post leans on. **Technical** is for people who
+   build software and want the mechanism; **product** is for people who use apps
+   of this kind and want to know how a feature was designed. Almost nobody is
+   both, so a post serves one properly rather than half-serving each. The label
+   is shown on the post and the index, and goes into the `Article` JSON-LD. An
+   unknown or missing value fails the build.
 
 3. Write the post in Markdown. Raw HTML is fine inline, so an existing HTML
    document can be pasted into a `.html` post (drop its `<html>`, `<head>` and

@@ -120,12 +120,19 @@ the same walk with new sentences. Read the earlier post before starting.
 If no area is ready — the doc is thin and the code would take a day to read —
 say so and ask, rather than writing a shallow post to fill a slot.
 
-## Vary the subject
+## Vary the subject, and the axis
 
 Check the two or three most recent posts and pick a different part of the app.
 The offline and download machinery is the most heavily documented area and will
 dominate every list you make; it is not three posts in a row. Rotate between the
 server-side pipeline, the client, the map, the weather and the domain.
+
+Rotate the `audience` too. The backlog leans technical, because the repo's docs
+are written for engineers and that is where most topics come from — so a run of
+technical posts is the easy mistake, and it loses half the readership. If the
+last two posts were technical, the next one is product: what a screen shows,
+what it refuses to show, the design choice behind it. The material is there;
+it is just filed under docs written in a different register.
 
 ## Scope
 

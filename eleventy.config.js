@@ -61,6 +61,43 @@ function youtube(id, title, uploadDate, description = "") {
 <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>`;
 }
 
+// The two axes a post can lean on. Technical readers build software and want
+// the mechanism; product readers use apps of this kind and want to know how a
+// feature was designed. Almost nobody is both, so a post declares which it
+// serves and the writing follows from that.
+const AUDIENCES = {
+  technical: "Technical",
+  product: "Product",
+};
+
+/**
+ * Validate a post's `audience` front matter and return its display labels.
+ *
+ * Throws rather than falling back, so a post that forgets to declare an
+ * audience — or invents a third one — fails the build instead of shipping
+ * uncategorised.
+ *
+ * @param {string[]|string} value The `audience` front-matter value.
+ * @param {string} [title] The post's title, for the error message.
+ * @returns {{name: string, label: string}[]}
+ */
+function audienceLabels(value, title = "a post") {
+  const names = Array.isArray(value) ? value : value ? [value] : [];
+  if (names.length === 0) {
+    throw new Error(
+      `audience: "${title}" declares none. Use [technical], [product], or both.`,
+    );
+  }
+  return names.map((name) => {
+    if (!AUDIENCES[name]) {
+      throw new Error(
+        `audience: "${name}" on "${title}" is not one of ${Object.keys(AUDIENCES).join(", ")}`,
+      );
+    }
+    return { name, label: AUDIENCES[name] };
+  });
+}
+
 /**
  * Render an editor's note — the site author's own commentary on a post,
  * set apart from the post's voice.
@@ -111,6 +148,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode("youtube", youtube);
   eleventyConfig.addPairedShortcode("editor", editor);
 
+  eleventyConfig.addFilter("audienceLabels", audienceLabels);
+  eleventyConfig.addFilter("audienceSchema", (audiences) =>
+    audiences.map(({ label }) => ({ "@type": "Audience", audienceType: label })),
+  );
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));
   eleventyConfig.addFilter("readableDate", (date) =>
     new Date(date).toLocaleDateString("en-GB", {

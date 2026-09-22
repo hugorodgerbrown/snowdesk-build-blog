@@ -2,6 +2,7 @@
 title: Placeholder post
 description: A draft that exercises every piece of the post layout — byline, youtube embed, editor's note and a table — so CI validates them. Never published.
 date: 2026-09-18
+audience: [technical, product]
 draft: true
 permalink: /placeholder/
 ---

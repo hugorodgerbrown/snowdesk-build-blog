@@ -109,6 +109,26 @@
     margin-bottom: 12px;
   }
 
+  /* Which axis a post leans on: technical readers want the mechanism,
+     product readers want the design. Both is allowed and has to be earned. */
+  .axis {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    margin: 0 0 12px 6px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+  }
+  .axis-technical { color: #1d6a4f; }
+  .axis-product { color: #8a4a12; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .axis-technical { color: #6fc3a0; }
+    :root:not([data-theme="light"]) .axis-product { color: #d8a05a; }
+  }
+
   .hook {
     margin: 0 0 12px;
     color: var(--ink);
@@ -214,6 +234,12 @@
   articles; the rest are drawn from explainers in the app repo's
   <code>docs/</code> and name the code to read. Ordering is immaterial — pick
   whichever suits the week, then vary the area next time.</p>
+  <p>Each entry carries the axis it leans on. <b>Technical</b> is for people who
+  build software and want the mechanism; <b>product</b> is for people who use
+  apps of this kind and want to know how a feature was designed. Almost nobody
+  is both, so a post serves one properly rather than half-serving each — and the
+  handful marked both have to earn it. Vary the axis as well as the area: a run
+  of technical posts loses half the readership.</p>
   <span class="count">27 posts · 8 already written · compiled 21 September 2026</span>
 </header>
 
@@ -227,7 +253,7 @@
 </div>
 
 <article>
-  <span class="area">Routes</span>
+  <span class="area">Routes</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
   <h2>From GPX to line</h2>
   <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/LrcourJqZ8Ag7YqLVStue3">claude.ai/artifact/LrcourJqZ8Ag7YqLVStue3</a> — complete, with an annotated GPX file, a height-profile figure and a thinning diagram. Static HTML and inline SVG throughout, so it ports without touching the blog's no-JavaScript rule.</p>
   <p class="hook">You choose a file. A moment later there is a line on the map and
@@ -249,7 +275,7 @@
 </article>
 
 <article>
-  <span class="area">Bulletins</span>
+  <span class="area">Bulletins</span><span class="axis axis-product">Product</span>
   <h2>What actually changes in a bulletin</h2>
   <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/GULVjFKkYsFLrrFpSWqvhT">claude.ai/artifact/GULVjFKkYsFLrrFpSWqvhT</a> — complete, built on one region's full season. <b>Port needs work:</b> the day-by-day season strip uses a JavaScript hover tooltip, and the blog allows no client-side JavaScript except JSON-LD. The same per-day detail renders statically as SVG <code>&lt;title&gt;</code> elements or <code>title</code> attributes, which browsers surface on hover with no script.</p>
   <p class="hook">Snowdesk is about to start telling people when the bulletin for
@@ -269,7 +295,7 @@
 </article>
 
 <article>
-  <span class="area">Map</span>
+  <span class="area">Map</span><span class="axis axis-technical">Technical</span>
   <h2>Inside the Snowdesk map</h2>
   <p class="exists"><b>Written, in part</b><a href="https://claude.ai/artifact/U9McxiwnA2p6zJzmmKs4AV">claude.ai/artifact/U9McxiwnA2p6zJzmmKs4AV</a> — sections 01–07 are a finished explainer, written for engineers who don't write JavaScript. Sections 08–11 are an internal review cycle with findings and ticket numbers, and come out. Everything is static HTML and inline SVG.</p>
   <p class="hook">A web map is not a picture, and nothing in the codebase draws
@@ -294,7 +320,7 @@
 </article>
 
 <article>
-  <span class="area">Routes</span>
+  <span class="area">Routes</span><span class="axis axis-product">Product</span>
   <h2>Anatomy of a route</h2>
   <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/HWyvR2F6KzmzVi1PQdcwBd">claude.ai/artifact/HWyvR2F6KzmzVi1PQdcwBd</a> — complete, and the strongest of the set. <b>Port needs work:</b> it carries 16 published files, mostly real screenshots of the running app; those images have to come with it. The exploded layer stack is CSS transforms, no JavaScript.</p>
   <p class="hook">A saved route started as a line on the map. It now carries six
@@ -319,7 +345,7 @@
 </article>
 
 <article>
-  <span class="area">Design</span>
+  <span class="area">Design</span><span class="axis axis-product">Product</span>
   <h2>Four ways to say dry</h2>
   <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/Pks4K181hbm9p8H1bydUox">claude.ai/artifact/Pks4K181hbm9p8H1bydUox</a> — complete, with live reproductions of the real card rendered in the app's own tokens. Static HTML and CSS. <b>Note:</b> it is written as a design proposal with ticket references; a post keeps the sweep and the reasoning and drops the proposal framing.</p>
   <p class="hook">Every problem card on a bulletin page stated its category four
@@ -341,7 +367,7 @@
 </article>
 
 <article>
-  <span class="area">Offline</span>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
   <h2>Inside the boundary, everything</h2>
   <p class="exists"><b>Written, as a proposal</b><a href="https://claude.ai/artifact/FGA9AGEkQkXiGP3HKfvfyq">claude.ai/artifact/FGA9AGEkQkXiGP3HKfvfyq</a> — one large SVG figure and a tight argument, all static. <b>Port needs work:</b> it is a scoping document, organised around three tickets in dependency order. A post keeps the contract, the two halves and the bug it turned up, and drops the ticket chain.</p>
   <p class="hook">A downloaded area stops being a bag of tiles when its boundary
@@ -368,7 +394,7 @@
 </article>
 
 <article>
-  <span class="area">Bulletins</span>
+  <span class="area">Bulletins</span><span class="axis axis-product">Product</span>
   <h2>The sentence at the top of every bulletin</h2>
   <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/3tZpaKus3rHgbEtjVDv7Uc">claude.ai/artifact/3tZpaKus3rHgbEtjVDv7Uc</a> — all eighty sentences laid out with their real archive counts. Static HTML. <b>Port needs work:</b> it is a copy-review sheet for editing the matrix, so it ends on rules for authors. A post keeps the findings and shows a sample of the cells rather than all eighty.</p>
   <p class="hook">Every bulletin page opens with a sentence telling you what kind
@@ -395,7 +421,7 @@
 </article>
 
 <article>
-  <span class="area">Product</span>
+  <span class="area">Product</span><span class="axis axis-product">Product</span>
   <h2>Two documents and a map</h2>
   <p class="exists"><b>Written, as a proposal</b><a href="https://claude.ai/artifact/N2m5BZ77Tfc92rStDxmHed">claude.ai/artifact/N2m5BZ77Tfc92rStDxmHed</a> — every route and every entity with a verdict, verified against the working tree. Static HTML. <b>Port needs work:</b> it is written as a proposal and has since shipped, so a post is written in the past tense and can say how it turned out.</p>
   <p class="hook">Only two things on Snowdesk are read at length, and both are
@@ -425,7 +451,7 @@
 </div>
 
 <article>
-  <span class="area">Offline</span>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span>
   <h2>Tapping save with no signal</h2>
   <p class="hook">You pin a spot on the map in a lift queue with one bar, and it
   saves.</p>
@@ -444,7 +470,7 @@
 </article>
 
 <article>
-  <span class="area">Bulletins</span>
+  <span class="area">Bulletins</span><span class="axis axis-technical">Technical</span>
   <h2>Three countries, one page</h2>
   <p class="hook">Switzerland, Austria/Italy and France each publish avalanche
   bulletins, and no two agree on the format.</p>
@@ -465,7 +491,7 @@
 </article>
 
 <article>
-  <span class="area">Offline</span>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
   <h2>What this device can actually show you</h2>
   <p class="hook">A user downloaded a region while connected, went underground,
   and got "this page isn't available offline" — no map, no content, and nothing
@@ -486,7 +512,7 @@
 </article>
 
 <article>
-  <span class="area">Map</span>
+  <span class="area">Map</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
   <h2>A map that knows what day it is</h2>
   <p class="hook">The whole app is one map. Drag the slider along the bottom and
   the colours change as you scrub back through the season.</p>
@@ -506,7 +532,7 @@
 </article>
 
 <article>
-  <span class="area">Bulletins</span>
+  <span class="area">Bulletins</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
   <h2>The calendar tile that splits in half</h2>
   <p class="hook">Open the calendar on a bulletin page and some tiles are one
   colour, some are two, split on the diagonal.</p>
@@ -525,7 +551,7 @@
 </article>
 
 <article>
-  <span class="area">Weather</span>
+  <span class="area">Weather</span><span class="axis axis-product">Product</span>
   <h2>Where the weather goes, and where it deliberately doesn't</h2>
   <p class="hook">Snowdesk shows a forecast on a resort page, on a saved pin, on
   a location page and on the map — and, on the one page you would most expect
@@ -544,7 +570,7 @@
 </article>
 
 <article>
-  <span class="area">Data</span>
+  <span class="area">Data</span><span class="axis axis-technical">Technical</span>
   <h2>How far back the bulletins go</h2>
   <p class="hook">The Swiss avalanche service publishes a bulletin every day and
   has done for decades. You can have about two and a half seasons of them.</p>
@@ -565,7 +591,7 @@
 </article>
 
 <article>
-  <span class="area">Accounts</span>
+  <span class="area">Accounts</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
   <h2>An account is an email address proven reachable</h2>
   <p class="hook">No password required, no third-party auth library, and for a
   long time no account page worth the name.</p>
@@ -584,7 +610,7 @@
 </article>
 
 <article>
-  <span class="area">Offline</span>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span>
   <h2>A service worker that waits to be asked</h2>
   <p class="hook">The second time you open any page it paints instantly, and
   nobody asked you to install anything.</p>
@@ -603,7 +629,7 @@
 </article>
 
 <article>
-  <span class="area">Platform</span>
+  <span class="area">Platform</span><span class="axis axis-technical">Technical</span>
   <h2>Answering a language model without being scraped</h2>
   <p class="hook">Ask Claude about avalanche conditions in Valais and it can
   query Snowdesk directly, instead of reading a rendered page and guessing.</p>
@@ -621,7 +647,7 @@
 </article>
 
 <article>
-  <span class="area">Platform</span>
+  <span class="area">Platform</span><span class="axis axis-technical">Technical</span>
   <h2>Phoning home when everything is broken</h2>
   <p class="hook">The failures worth knowing about are the ones that break the
   thing you would use to report them.</p>
@@ -637,7 +663,7 @@
 </article>
 
 <article>
-  <span class="area">Domain</span>
+  <span class="area">Domain</span><span class="axis axis-product">Product</span>
   <h2>How to read an avalanche bulletin</h2>
   <p class="hook">The danger scale runs one to five, and around half of all
   avalanche fatalities happen at level three.</p>
@@ -655,7 +681,7 @@
 </article>
 
 <article>
-  <span class="area">Data</span>
+  <span class="area">Data</span><span class="axis axis-technical">Technical</span>
   <h2>Every coordinate means something different</h2>
   <p class="hook">A saved pin, a resort, a field report and a warning region all
   carry a latitude and a longitude, and you may conclude something different
@@ -676,7 +702,7 @@
 </article>
 
 <article>
-  <span class="area">Offline</span>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span>
   <h2>Reading a bug off a phone with no devtools</h2>
   <p class="hook">A region reports as downloaded and the map is blank. Six things
   must all be true for it to draw, and on a phone in a valley not one of them is
@@ -696,7 +722,7 @@
 </article>
 
 <article>
-  <span class="area">Engineering</span>
+  <span class="area">Engineering</span><span class="axis axis-technical">Technical</span>
   <h2>Testing an app that has to work with no signal</h2>
   <p class="hook">Download a region, switch the network off, open the map on a
   mountain. Do you see a map? None of the normal test layers can answer that.</p>
@@ -715,7 +741,7 @@
 </article>
 
 <article>
-  <span class="area">Design</span>
+  <span class="area">Design</span><span class="axis axis-product">Product</span>
   <h2>The colours that are not ours to choose</h2>
   <p class="hook">Snowdesk has a dark mode. Five of its colours refuse to
   participate.</p>
@@ -734,7 +760,7 @@
 </article>
 
 <article>
-  <span class="area">Platform</span>
+  <span class="area">Platform</span><span class="axis axis-technical">Technical</span>
   <h2>The strings the extractor cannot see</h2>
   <p class="hook">Django's translation tooling reads your templates and your
   Python. It does not read your JavaScript, and it does not tell you so.</p>
@@ -751,7 +777,7 @@
 </article>
 
 <article>
-  <span class="area">Engineering</span>
+  <span class="area">Engineering</span><span class="axis axis-technical">Technical</span>
   <h2>Measuring what production actually serves</h2>
   <p class="hook">The performance audit was scoring roughly 23,000 lines of
   JavaScript that no visitor has ever downloaded.</p>
@@ -767,7 +793,7 @@
 </article>
 
 <article>
-  <span class="area">Offline</span>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span>
   <h2>One database in the browser</h2>
   <p class="hook">Everything Snowdesk remembers on your device — the outbox, your
   saved pins, the sync log, the debug trace — lives in one small database with

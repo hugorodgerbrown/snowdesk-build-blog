@@ -2,6 +2,7 @@
 title: The sentence at the top of every bulletin
 description: Every bulletin page in Snowdesk opens with one line telling you what kind of day it is. There are eighty of those lines, a person wrote every one, and the reason they are not generated is the interesting part.
 date: 2026-09-22
+audience: [product]
 draft: true
 sources:
   - snowdesk-data-pipeline docs/day-summary.md
