@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "blog",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "BUILD_DRAFTS=true npx @11ty/eleventy --serve --port ${PORT:-8080}"
+      ],
+      "port": 8080
+    }
+  ]
+}

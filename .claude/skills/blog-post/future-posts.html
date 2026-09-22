@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Future posts</title>
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --surface: #ffffff;
+    --ink: #1c1b19;
+    --ink-soft: #55524d;
+    --ink-faint: #8a857e;
+    --rule: #e4e0da;
+    --accent: #1f5e8c;
+    --chip: #eef1f4;
+    --chip-ink: #2c4a5e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17181a;
+      --surface: #1f2124;
+      --ink: #eceae6;
+      --ink-soft: #b3aea6;
+      --ink-faint: #85807a;
+      --rule: #32353a;
+      --accent: #7fb6dd;
+      --chip: #262b31;
+      --chip-ink: #9dc4dd;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17181a;
+    --surface: #1f2124;
+    --ink: #eceae6;
+    --ink-soft: #b3aea6;
+    --ink-faint: #85807a;
+    --rule: #32353a;
+    --accent: #7fb6dd;
+    --chip: #262b31;
+    --chip-ink: #9dc4dd;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0 16px 96px;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 44rem; margin: 0 auto; }
+
+  header.page {
+    padding: 56px 0 32px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 8px;
+  }
+  header.page h1 {
+    margin: 0 0 12px;
+    font-size: 1.9rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  header.page p {
+    margin: 0 0 10px;
+    color: var(--ink-soft);
+    max-width: 38rem;
+  }
+  header.page p:last-child { margin-bottom: 0; }
+
+  .count {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  article {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 22px 22px 18px;
+    margin: 20px 0;
+  }
+
+  article h2 {
+    margin: 0 0 4px;
+    font-size: 1.18rem;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+
+  .area {
+    display: inline-block;
+    background: var(--chip);
+    color: var(--chip-ink);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+
+  /* Which axis a post leans on: technical readers want the mechanism,
+     product readers want the design. Both is allowed and has to be earned. */
+  .axis {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    margin: 0 0 12px 6px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+  }
+  .axis-technical { color: #1d6a4f; }
+  .axis-product { color: #8a4a12; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .axis-technical { color: #6fc3a0; }
+    :root:not([data-theme="light"]) .axis-product { color: #d8a05a; }
+  }
+
+  .hook {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-size: 1.02rem;
+  }
+  .hook em { font-style: italic; color: var(--ink-soft); }
+
+  article p { margin: 0 0 12px; color: var(--ink-soft); }
+  article p:last-of-type { margin-bottom: 16px; }
+
+  .note {
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+  }
+
+  .exists {
+    background: var(--chip);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+  }
+  .exists b {
+    color: var(--chip-ink);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .exists a { color: var(--accent); }
+
+  .group {
+    margin: 48px 0 8px;
+    padding-top: 28px;
+    border-top: 2px solid var(--ink);
+  }
+  .group h2 {
+    margin: 0 0 8px;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+  }
+  .group p {
+    margin: 0;
+    color: var(--ink-soft);
+    max-width: 38rem;
+  }
+
+  .sources {
+    border-top: 1px solid var(--rule);
+    padding-top: 12px;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    line-height: 1.7;
+    word-break: break-word;
+  }
+  .sources b {
+    font-family: inherit;
+    color: var(--ink-faint);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  footer.page {
+    border-top: 1px solid var(--rule);
+    margin-top: 40px;
+    padding-top: 24px;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+  }
+  footer.page h2 {
+    font-size: 0.95rem;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  footer.page ul { margin: 0 0 18px; padding-left: 20px; }
+  footer.page li { margin-bottom: 6px; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <h1>Future posts</h1>
+  <p>A backlog for <b>build.snowdesk.info</b>. Each entry is one feature area of
+  the Snowdesk app, walked end to end: what a reader can see, how it is built,
+  and the choices explained at the point they come up.</p>
+  <p>The first eight already exist as published Artifacts and are finished
+  articles; the rest are drawn from explainers in the app repo's
+  <code>docs/</code> and name the code to read. Ordering is immaterial — pick
+  whichever suits the week, then vary the area next time.</p>
+  <p>Each entry carries the axis it leans on. <b>Technical</b> is for people who
+  build software and want the mechanism; <b>product</b> is for people who use
+  apps of this kind and want to know how a feature was designed. Almost nobody
+  is both, so a post serves one properly rather than half-serving each — and the
+  handful marked both have to earn it. Vary the axis as well as the area: a run
+  of technical posts loses half the readership.</p>
+  <span class="count">27 posts · 8 already written · compiled 21 September 2026</span>
+</header>
+
+<div class="group">
+  <h2>Already written</h2>
+  <p>These exist as finished explainers, published as Artifacts. They are the
+  best material here and the model for everything below: a feature walked end to
+  end, with figures drawn for the argument rather than decoration. Porting one is
+  an editing job, not a writing job — check the facts still hold, fit it to the
+  blog's typography, and mind the constraint noted on each.</p>
+</div>
+
+<article>
+  <span class="area">Routes</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
+  <h2>From GPX to line</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/LrcourJqZ8Ag7YqLVStue3">claude.ai/artifact/LrcourJqZ8Ag7YqLVStue3</a> — complete, with an annotated GPX file, a height-profile figure and a thinning diagram. Static HTML and inline SVG throughout, so it ports without touching the blog's no-JavaScript rule.</p>
+  <p class="hook">You choose a file. A moment later there is a line on the map and
+  a handful of figures beside it. The article is everything in between.</p>
+  <p>What the file actually holds, which parts are read, what is worked out, what
+  is thrown away, and what finally gets drawn. Two rules carry it. <em>Measure
+  first, thin afterwards</em> — distance and climb are taken over every recorded
+  point before any are discarded, because a thinned line cuts corners and would
+  make every route quietly shorter and flatter. And <em>unknown is not zero</em>
+  — a file with no heights yields no climb figure rather than "0 m", because
+  those are different facts to someone planning a day out.</p>
+  <p>The thinning section is the best part: Douglas–Peucker with a tolerance that
+  is not chosen but found, doubled from about a metre until the track fits under
+  the cap. It works because the algorithm returns a subsequence rather than a
+  redrawing, so every surviving point brings its own recorded height and nothing
+  is interpolated. And the file itself is never kept, which costs something real
+  — a route already imported can never be re-read under better rules.</p>
+  <p class="sources"><b>Sources</b>the artifact · apps/routes/ · docs/decisions/gpx-uploads-are-parsed-not-stored.md</p>
+</article>
+
+<article>
+  <span class="area">Bulletins</span><span class="axis axis-product">Product</span>
+  <h2>What actually changes in a bulletin</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/GULVjFKkYsFLrrFpSWqvhT">claude.ai/artifact/GULVjFKkYsFLrrFpSWqvhT</a> — complete, built on one region's full season. <b>Port needs work:</b> the day-by-day season strip uses a JavaScript hover tooltip, and the blog allows no client-side JavaScript except JSON-LD. The same per-day detail renders statically as SVG <code>&lt;title&gt;</code> elements or <code>title</code> attributes, which browsers surface on hover with no script.</p>
+  <p class="hook">Snowdesk is about to start telling people when the bulletin for
+  a place they follow changes. Before writing that notification, it is worth
+  knowing what a change actually is.</p>
+  <p>One region, one full season: 296 bulletins across 189 days. The headline
+  danger rating moved on 13.8% of them. On the other 86% a notification keyed to
+  the rating has nothing to say — and on two days in three of those, it would be
+  wrong to say nothing, because something in the bulletin did change.</p>
+  <p>What makes it a strong article is that the argument is made from the data
+  rather than asserted. The season strip puts the published rating above what
+  changed beneath it, and the two bands visibly disagree: long unbroken stretches
+  of orange over a lower band that never sits still. The conclusion — that "the
+  rating changed" is the wrong trigger for a notification — is something the
+  reader reaches before being told.</p>
+  <p class="sources"><b>Sources</b>the artifact · SNOW-937 · apps/bulletins/</p>
+</article>
+
+<article>
+  <span class="area">Map</span><span class="axis axis-technical">Technical</span>
+  <h2>Inside the Snowdesk map</h2>
+  <p class="exists"><b>Written, in part</b><a href="https://claude.ai/artifact/U9McxiwnA2p6zJzmmKs4AV">claude.ai/artifact/U9McxiwnA2p6zJzmmKs4AV</a> — sections 01–07 are a finished explainer, written for engineers who don't write JavaScript. Sections 08–11 are an internal review cycle with findings and ticket numbers, and come out. Everything is static HTML and inline SVG.</p>
+  <p class="hook">A web map is not a picture, and nothing in the codebase draws
+  anything.</p>
+  <p>The explainer half opens on that idea and earns it: the rendering library
+  takes a description — sources and layers — and resolves it to WebGL itself, so
+  every piece of map code is one of four verbs. Paint rules are data, not
+  callbacks, which is why colouring 149 regions costs nothing.</p>
+  <p>Then the trick that makes the season scrubber feel instant: separate the
+  shape of a thing from what is currently true about it. The geometry is uploaded
+  once; changing day is 149 small writes into a side table and no network at all.
+  It has a sharp edge the article does not hide — that side table lives with the
+  source, so swapping the basemap destroys it and the map goes grey, which is why
+  a basemap picker is 500 lines rather than 50.</p>
+  <p>It also has the best cautionary tale in the collection. The map's 82 script
+  files share one namespace and load order is the dependency graph. One module
+  read a global that nothing ever assigned, so every guard around it took the
+  "not ready" branch, forever. Nothing threw, nothing logged, the feature simply
+  never worked — and a linter now fails the build on any read of a name nothing
+  assigns.</p>
+  <p class="sources"><b>Sources</b>the artifact, §01–07 · docs/map-and-api.md · static/js/map*.js</p>
+</article>
+
+<article>
+  <span class="area">Routes</span><span class="axis axis-product">Product</span>
+  <h2>Anatomy of a route</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/HWyvR2F6KzmzVi1PQdcwBd">claude.ai/artifact/HWyvR2F6KzmzVi1PQdcwBd</a> — complete, and the strongest of the set. <b>Port needs work:</b> it carries 16 published files, mostly real screenshots of the running app; those images have to come with it. The exploded layer stack is CSS transforms, no JavaScript.</p>
+  <p class="hook">A saved route started as a line on the map. It now carries six
+  kinds of information about the ground it crosses, packed into a few pixels of
+  width. The article takes it apart one layer at a time.</p>
+  <p>Track, then the steepness of the terrain under it, then rings where the
+  slope above could release onto you, then the passages where a slip would not
+  stop, then arrows for the way the ground falls, then the day's bulletin against
+  your line. Every picture is a real screenshot with every other layer switched
+  off, so each one shows exactly what that layer adds.</p>
+  <p>Two rules open it and they look contradictory until you see the principle.
+  <em>Steepness comes from the ground, never from the track</em> — a skin track
+  zigzagging up a 38° face rises about 15° along its own length, so colouring by
+  the track's gradient would make a serious slope look easy. <em>Height comes
+  from the track, never from the ground</em> — where the skier is, is exactly
+  what a GPX records. Take each figure from the thing that actually measures it.</p>
+  <p>The closing table is the part to keep whatever else is cut: what a missing
+  mark means, and what it never means. No rings does not mean a safe route. Grey
+  dashes mean the terrain grid had no answer, never gentle ground. Every mark
+  says "look here" and none says "you're fine".</p>
+  <p class="sources"><b>Sources</b>the artifact · apps/routes/services/ · docs/decisions/ (fall line, slope segments, terrain-unknown-is-a-reason)</p>
+</article>
+
+<article>
+  <span class="area">Design</span><span class="axis axis-product">Product</span>
+  <h2>Four ways to say dry</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/Pks4K181hbm9p8H1bydUox">claude.ai/artifact/Pks4K181hbm9p8H1bydUox</a> — complete, with live reproductions of the real card rendered in the app's own tokens. Static HTML and CSS. <b>Note:</b> it is written as a design proposal with ticket references; a post keeps the sweep and the reasoning and drops the proposal framing.</p>
+  <p class="hook">Every problem card on a bulletin page stated its category four
+  separate times. Across 9,614 of them in production, one of those four had never
+  once been the only one speaking.</p>
+  <p>This is the article about taking something away, which is rarer and more
+  interesting than the ones about adding. The method is what makes it: rather
+  than arguing from taste, it sweeps the entire production archive and counts.
+  Every card already names its category in its title — 9,614 out of 9,614. The
+  day never splits on 96% of pages. Four in five pages carry exactly one card, so
+  both labels are distinguishing a set of one.</p>
+  <p>Then it turns the space that frees up into a second argument: the danger
+  level is the most scannable thing on the page and it was spending four pixels.
+  Four treatments are drawn at all five levels — because a scale is not uniform,
+  and something that reads well at Considerable can vanish at Low or fail
+  contrast at High — with the contrast ratios measured rather than asserted, and
+  the runner-up explained as carefully as the winner.</p>
+  <p class="sources"><b>Sources</b>the artifact · src/css/main.css · apps/bulletins/services/render_model.py</p>
+</article>
+
+<article>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
+  <h2>Inside the boundary, everything</h2>
+  <p class="exists"><b>Written, as a proposal</b><a href="https://claude.ai/artifact/FGA9AGEkQkXiGP3HKfvfyq">claude.ai/artifact/FGA9AGEkQkXiGP3HKfvfyq</a> — one large SVG figure and a tight argument, all static. <b>Port needs work:</b> it is a scoping document, organised around three tickets in dependency order. A post keeps the contract, the two halves and the bug it turned up, and drops the ticket chain.</p>
+  <p class="hook">A downloaded area stops being a bag of tiles when its boundary
+  becomes a promise: inside it, everything; outside it, whatever happens to be
+  there.</p>
+  <p>The best thing here is watching one asymmetry delete most of the hard work.
+  Under-fetching is the only real defect — a bulletin someone needed and does not
+  have. Over-fetching is not, because the content is kilobytes against tiles
+  measured in megabytes. That single observation removes the need for per-area
+  filtering, for any polygon geometry (a rectangle test can only over-include,
+  which is the correct side to fail on) and for deciding which day matters. The
+  acceptance test becomes a property rather than a list.</p>
+  <p>Then the distinction the design had never drawn: an area has two halves that
+  age differently. Tiles, style, sprites and terrain are a fixed grid over fixed
+  ground and cannot go stale. Bulletins, weather and observations are new every
+  day. Conflating them is why a download made on Tuesday is quietly out of date
+  by Thursday with nothing broken and nothing deleted.</p>
+  <p>It also ends on something worth the whole piece: the investigation turned up
+  that the app could show any day in its history and could not show tomorrow —
+  not for want of data, which was already on the device, but because two
+  functions that take a bound as a parameter were being handed the clock instead
+  of the data.</p>
+  <p class="sources"><b>Sources</b>the artifact · static/js/basemap_download_core.js · docs/decisions/inside-the-boundary-is-complete.md</p>
+</article>
+
+<article>
+  <span class="area">Bulletins</span><span class="axis axis-product">Product</span>
+  <h2>The sentence at the top of every bulletin</h2>
+  <p class="exists"><b>Written</b><a href="https://claude.ai/artifact/3tZpaKus3rHgbEtjVDv7Uc">claude.ai/artifact/3tZpaKus3rHgbEtjVDv7Uc</a> — all eighty sentences laid out with their real archive counts. Static HTML. <b>Port needs work:</b> it is a copy-review sheet for editing the matrix, so it ends on rules for authors. A post keeps the findings and shows a sample of the cells rather than all eighty.</p>
+  <p class="hook">Every bulletin page opens with a sentence telling you what kind
+  of day it is. There are eighty of them, and a person wrote every one.</p>
+  <p>Three axes choose the sentence: whether the danger is static, rising,
+  easing or shifting; the level it reaches; and whether the day's problems leave
+  evidence on the surface or are buried where field craft cannot read them. Four
+  by five by four is eighty cells, hand-authored, with no generic fallback,
+  because an unhandled combination would be the same failure the matrix exists to
+  fix.</p>
+  <p>What the artifact adds beyond the mechanism is what fell out of counting.
+  Only 30 of the 80 cells have ever been used — the rest are written against days
+  the archive has not yet produced. 96.4% of days never change at all. And the
+  finding worth building the post around: <em>nothing ever improves</em>. All 22
+  days whose rating fell did so by swapping a dry problem for wet snow, so the
+  number drops while the hazard changes character, and not one sentence in eighty
+  can offer the afternoon as the safer half.</p>
+  <p>Why hand-authored rather than generated: the five strings this replaced went
+  out on 4,300 pages, and "persistent or gliding-snow problems can mask the real
+  risk" appeared whether the problem was persistent weak layers or gliding snow,
+  whether the danger was 2 or 3, and whether it held all day or doubled by
+  mid-afternoon.</p>
+  <p class="sources"><b>Sources</b>the artifact · docs/day-summary.md · apps/bulletins/services/day_summary.py</p>
+</article>
+
+<article>
+  <span class="area">Product</span><span class="axis axis-product">Product</span>
+  <h2>Two documents and a map</h2>
+  <p class="exists"><b>Written, as a proposal</b><a href="https://claude.ai/artifact/N2m5BZ77Tfc92rStDxmHed">claude.ai/artifact/N2m5BZ77Tfc92rStDxmHed</a> — every route and every entity with a verdict, verified against the working tree. Static HTML. <b>Port needs work:</b> it is written as a proposal and has since shipped, so a post is written in the past tense and can say how it turned out.</p>
+  <p class="hook">Only two things on Snowdesk are read at length, and both are
+  dated documents with an issuer. Everything else is a way of getting to one of
+  them.</p>
+  <p>The article applies that one sentence to every URL the site has, and the
+  discipline is the point: a thesis is cheap until you make it adjudicate every
+  case. Each route gets one of four verdicts — stays a page, becomes a layer or
+  sheet on the map, is removed, or is new — with the reasoning next to it. Then
+  the same treatment for every entity, which surfaces the real finding: the two
+  documents were under-surfaced and the region was over-surfaced.</p>
+  <p>The exceptions are where it earns its keep. Account settings survives
+  because account mechanics are not map objects. The resort page survives, and
+  the article says plainly that this is a marketing call rather than an
+  architectural one — people search "Verbier avalanche", not "CH-4115" — and that
+  it should be decided deliberately rather than inherited. It also ends on the
+  honest gap: the thesis needs a region to be pinnable on the map, and that
+  affordance did not exist.</p>
+  <p class="sources"><b>Sources</b>the artifact · docs/site-structure.md · docs/decisions/two-documents-and-a-map.md</p>
+</article>
+
+<div class="group">
+  <h2>From the app itself</h2>
+  <p>Not a document — a feature built to explain the product, whose code comments
+  carry the failures that shaped it.</p>
+</div>
+
+<article>
+  <span class="area">Map</span><span class="axis axis-technical">Technical</span>
+  <h2>The map photographs itself</h2>
+  <p class="hook">Add <code>?layers=exploded</code> to the map URL and it comes
+  apart into a ladder of sheets, then rebuilds itself a rung at a time. Every
+  sheet is a photograph of the live renderer.</p>
+  <p>To make one, the code hides every layer except the tier it wants, waits for
+  a frame, and reads the canvas out as a PNG. That is four lines of intent and
+  three hard problems, each recorded in the comments. Boot-time layer restores
+  are fire-and-forget, so a layer landed in a step that had already hidden
+  everything and the basemap sheet came out with boundaries and resort pins on
+  it — loading is not showing. Reading the style once up front misses tiers
+  installed later, and restoring from that snapshot leaves them hidden for the
+  rest of the session with nothing left to reinstate them, so each layer's state
+  is recorded the first time it is seen. And a visitor who follows only France
+  has Switzerland filtered out, so every Swiss sheet would photograph blank; the
+  capture forces it on and puts the preference back without writing storage.</p>
+  <p>The closing argument writes itself: an explainer built from photographs of
+  the real renderer cannot quietly drift from what it explains, and where it
+  could, it fails loudly — a rung naming a layer that no longer exists stops the
+  build rather than showing a picture of a map we do not draw.</p>
+  <p class="sources"><b>Sources</b>static/js/map_exploded.js · static/css/map_exploded.css · apps/public/templates/public/home.html</p>
+</article>
+
+<div class="group">
+  <h2>From the repo docs</h2>
+  <p>Ideas rather than drafts, each drawn from an explainer in the app repo's
+  <code>docs/</code>. These need writing from the source, following the model
+  above.</p>
+</div>
+
+<article>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span>
+  <h2>Tapping save with no signal</h2>
+  <p class="hook">You pin a spot on the map in a lift queue with one bar, and it
+  saves.</p>
+  <p>The post follows that tap. The request goes into an outbox in the browser's
+  own database rather than to the network; a half-opacity marker appears
+  immediately so the save is visible at once; the queue replays it when the
+  signal returns, at which point the optimistic pin is swapped for the real
+  server one.</p>
+  <p>The failure paths are the interesting part. An idempotency key is minted
+  once when the row is queued and sent unchanged on every replay, so a reply
+  lost on a flaky connection cannot create the pin twice. Hitting the favourites
+  cap offline returns a 409, which the queue treats as permanent rather than
+  retryable, and the pending pin is withdrawn. Queued rows are partitioned by
+  account, so signing out cannot replay one person's saves as another's.</p>
+  <p class="sources"><b>Sources</b>docs/mutation-queue.md · docs/indexeddb-scaffolding.md · static/js/mutation_queue.js · static/js/favourites.js</p>
+</article>
+
+<article>
+  <span class="area">Bulletins</span><span class="axis axis-technical">Technical</span>
+  <h2>Three countries, one page</h2>
+  <p class="hook">Switzerland, Austria/Italy and France each publish avalanche
+  bulletins, and no two agree on the format.</p>
+  <p>France serves XML under a different product name entirely and is translated
+  field by field into the standard the other two use, so that by the time a
+  bulletin is stored, all three look the same. The post follows one bulletin
+  from the provider's API to the rendered page.</p>
+  <p>The spine is the render model: at ingest, each bulletin is turned into a
+  pre-computed block of JSON so no template contains derivation logic, stamped
+  with a version so a change to the shape means rebuilding the archive rather
+  than rendering old rows through new code. Presentation-only fields are added
+  later, outside the stored JSON, so they can change without a rebuild. It can
+  close on the fidelity guard and why it exists: one field was fetched,
+  translated, stored and versioned for the project's entire life without any
+  template displaying it, so CI now fails the build if a field the provider
+  published reaches no surface.</p>
+  <p class="sources"><b>Sources</b>docs/render-model.md · docs/meteofrance-mapping.md · apps/bulletins/services/render_model.py · tests/sentinels/fidelity.py</p>
+</article>
+
+<article>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
+  <h2>What this device can actually show you</h2>
+  <p class="hook">A user downloaded a region while connected, went underground,
+  and got "this page isn't available offline" — no map, no content, and nothing
+  on the device able to explain why.</p>
+  <p>The post uses that journey as its spine. What makes Snowdesk work offline
+  lives in four stores that know nothing about each other, and each surface
+  reporting on one of them reported only its own half: the downloads sheet knew
+  about tiles, the layers menu knew about data feeds, the reset panel knew about
+  unsent rows. Nothing measured whether the page's own HTML was in the shell
+  cache — or whether it had been cached under a different account, which the
+  service worker refuses to serve and then falls through to the offline page
+  without saying so.</p>
+  <p>Those two unmeasured rows are exactly the ones that produce that symptom.
+  The fix is a report that reads all four stores and gives one verdict with the
+  evidence under it, on a page deliberately left public, because what a device
+  has saved is most worth reading when you are signed out and stuck.</p>
+  <p class="sources"><b>Sources</b>docs/offline-audit.md · docs/offline-map.md · static/js/offline_audit.js · static/js/sw.js</p>
+</article>
+
+<article>
+  <span class="area">Map</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
+  <h2>A map that knows what day it is</h2>
+  <p class="hook">The whole app is one map. Drag the slider along the bottom and
+  the colours change as you scrub back through the season.</p>
+  <p>The post covers the choropleth of avalanche regions, the scrubber that
+  animates a whole winter, and what happens when you tap: an outline, a season
+  ribbon, a readout chip, and deliberately <em>no</em> popup — the popup covered
+  the terrain the visitor had just tapped, so the whole state machine was
+  deleted. Its endpoint survived and now feeds the region panel instead, which
+  is a good small story about the difference between a surface and the data
+  behind it.</p>
+  <p>There is also an honest engineering thread: the map was one 9,192-line
+  JavaScript file, split along the eleven seams it already contained. These are
+  classic scripts sharing one global scope, so the order of the script tags is
+  load-bearing — three declaration files before the boot file, nine surface
+  files after it.</p>
+  <p class="sources"><b>Sources</b>docs/map-and-api.md · docs/map-page-functional-spec.md · static/js/map.js and the map_*.js set</p>
+</article>
+
+<article>
+  <span class="area">Bulletins</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
+  <h2>The calendar tile that splits in half</h2>
+  <p class="hook">Open the calendar on a bulletin page and some tiles are one
+  colour, some are two, split on the diagonal.</p>
+  <p>A two-colour tile is a day where the afternoon is worse than the morning.
+  The post explains where that comes from: one denormalised row per region per
+  day, computed at ingest, so the month grid renders without reading a single
+  bulletin at request time. Picking the authoritative bulletin for a day is its
+  own small puzzle — a morning issue beats the previous evening's, and an
+  evening issue belongs to tomorrow, not today.</p>
+  <p>It closes on the rule every compressed view obeys: a chip, a calendar tile
+  and a map colour always show the day's <em>peak</em> rating, never the morning
+  one, because that is what the SLF's own interpretation guide says to read when
+  you take one number for a day. Showing the lower number would under-represent
+  the hazard on exactly the days that deteriorate.</p>
+  <p class="sources"><b>Sources</b>docs/calendar.md · docs/compressed-views-rating-rule.md · apps/bulletins/services/day_rating.py</p>
+</article>
+
+<article>
+  <span class="area">Weather</span><span class="axis axis-product">Product</span>
+  <h2>Where the weather goes, and where it deliberately doesn't</h2>
+  <p class="hook">Snowdesk shows a forecast on a resort page, on a saved pin, on
+  a location page and on the map — and, on the one page you would most expect
+  it, refuses to.</p>
+  <p>The data is one row per location per day, never rewritten once that day is
+  past, so the app can always say what was known at the time rather than what
+  turned out to be true. The post walks the four surfaces that read it and what
+  each one asks for: today, today, a chosen date, and whatever date the map is
+  scrubbed to.</p>
+  <p>The refusal is the best part. The bulletin page used to carry a weather row
+  taken from the region's centroid, and it was removed: a warning region spans
+  thousands of metres of vertical, so a single point presented under a regional
+  heading claims more than it knows. The forecaster's own pan-regional prose
+  stays, because that claim is one the forecaster actually made.</p>
+  <p class="sources"><b>Sources</b>docs/weather-surfaces.md · docs/decisions/weather-is-one-immutable-location-row.md · apps/weather/</p>
+</article>
+
+<article>
+  <span class="area">Data</span><span class="axis axis-technical">Technical</span>
+  <h2>How far back the bulletins go</h2>
+  <p class="hook">The Swiss avalanche service publishes a bulletin every day and
+  has done for decades. You can have about two and a half seasons of them.</p>
+  <p>A short post about finding the edge of a public API. Walking the bulletin
+  list endpoint by offset, the responses stop at around 900 entries — not with
+  an error, not with a pagination boundary, but with an empty array, which is
+  the kind of edge you only find by looking. The oldest bulletin retrieved lines
+  up with the start of a season, so the cap reads as season-aligned rather than
+  arbitrary. Every plausible archive path returns a 404.</p>
+  <p>The conclusion is the useful part for anyone building on public data: a
+  "mirror the whole dataset" project is bounded to roughly what a season-to-date
+  run already fetches, and everything older lives somewhere that is not an API
+  at all.</p>
+  <p class="note">The source doc is marked historical and its figures are from a
+  probe on 1 May 2026. Re-run the probe before publishing, and write the post
+  around dated findings rather than current facts.</p>
+  <p class="sources"><b>Sources</b>docs/slf-api-history.md · apps/bulletins/services/slf_fetcher.py</p>
+</article>
+
+<article>
+  <span class="area">Accounts</span><span class="axis axis-technical">Technical</span><span class="axis axis-product">Product</span>
+  <h2>An account is an email address proven reachable</h2>
+  <p class="hook">No password required, no third-party auth library, and for a
+  long time no account page worth the name.</p>
+  <p>The post covers a deliberately small identity model: sign in by clicking a
+  signed link in an email, with a password or a passkey as later options rather
+  than the front door. Signing in unlocks the things saved on the map — pins,
+  routes, reports, followed regions — and the only account page left is
+  settings.</p>
+  <p>The good story inside it is what happened to subscriptions. Accounts used
+  to own subscription rows, captured by a form on every bulletin page. Nothing
+  ever sent a bulletin off one: every email the app sends is transactional. So a
+  subscription was a bookmark on a region wearing the wrong name, and bookmarks
+  belong on the map — they became pins, the old rows were converted, and the
+  table was dropped in its own deploy.</p>
+  <p class="sources"><b>Sources</b>docs/accounts.md · apps/accounts/ · docs/decisions/encrypted-email-field.md</p>
+</article>
+
+<article>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span>
+  <h2>A service worker that waits to be asked</h2>
+  <p class="hook">The second time you open any page it paints instantly, and
+  nobody asked you to install anything.</p>
+  <p>The post explains the shell: a small service worker registered on every
+  public page, caching the app's own assets on first visit so that offline
+  capability accrues from ordinary use rather than an opt-in. Then the part most
+  PWAs get wrong — a new worker deliberately does <em>not</em> take over on
+  install. It sits waiting until the user clicks Reload in a banner, because
+  swapping the code under a page someone is reading is a worse failure than
+  serving yesterday's build for another minute.</p>
+  <p>Two details worth the detour: the cache version is derived from a hash of
+  the shell's contents rather than bumped by hand, so it cannot be forgotten;
+  and the update banner names the build it is replacing, which turns "why is
+  this thing asking me to reload" into an answerable question.</p>
+  <p class="sources"><b>Sources</b>docs/offline-map.md · docs/offline-first.md · static/js/sw.js · apps/core/sw_shell.py</p>
+</article>
+
+<article>
+  <span class="area">Platform</span><span class="axis axis-technical">Technical</span>
+  <h2>Answering a language model without being scraped</h2>
+  <p class="hook">Ask Claude about avalanche conditions in Valais and it can
+  query Snowdesk directly, instead of reading a rendered page and guessing.</p>
+  <p>The post describes a small read-only MCP server: fifteen tools over regions,
+  bulletins, danger-rating history and location weather, advertised from
+  <code>/llms.txt</code>. It is a good subject because the implementation is so
+  much smaller than the ecosystem around it suggests — plain JSON-RPC over a
+  single Django view, no SDK and no async stack, because the spec permits a
+  POST-only endpoint and the app is WSGI.</p>
+  <p>Room for one genuinely useful detail for anyone building the same thing: the
+  endpoint answers on both the URL with a trailing slash and the one without,
+  because a client POSTs to exactly the URL a user typed, and Django's
+  slash-appending redirect would drop the request body on the way.</p>
+  <p class="sources"><b>Sources</b>docs/mcp-server.md · apps/mcp_server/views.py · apps/mcp_server/urls.py · apps/public/views.py (the llms.txt view)</p>
+</article>
+
+<article>
+  <span class="area">Platform</span><span class="axis axis-technical">Technical</span>
+  <h2>Phoning home when everything is broken</h2>
+  <p class="hook">The failures worth knowing about are the ones that break the
+  thing you would use to report them.</p>
+  <p>A broken service worker, a corrupt client database, an evicted cache, a
+  dead push subscription: each leaves a user with an app that misbehaves, and
+  each is invisible to any analytics script that assumes the page works. So the
+  telemetry is owned end to end rather than handed to a third-party library, on
+  an allowlist of named events, with an off switch.</p>
+  <p>The post is about a general principle with a specific instance:
+  observability that depends on the healthy path tells you nothing about the
+  broken one. Useful to anyone running a PWA, and short.</p>
+  <p class="sources"><b>Sources</b>docs/telemetry-pipeline.md · apps/analytics/</p>
+</article>
+
+<article>
+  <span class="area">Domain</span><span class="axis axis-product">Product</span>
+  <h2>How to read an avalanche bulletin</h2>
+  <p class="hook">The danger scale runs one to five, and around half of all
+  avalanche fatalities happen at level three.</p>
+  <p>The way in for a reader who arrives knowing nothing, and the post every
+  other bulletin post can link back to. It covers the five-point European scale,
+  why the steps are not evenly spaced — the jump from 2 to 3 is far bigger than
+  the numbers suggest — the plus/equals/minus subdivisions the Swiss service
+  adds within a level, and how aspect and elevation turn a single number into a
+  statement about particular slopes.</p>
+  <p>It can be grounded in the archive rather than written from the guide alone:
+  across 2,159 bulletins in one season, 54% carried moderate, 35% considerable,
+  5% high, and very high appeared on less than 1%. That distribution is the
+  context a reader needs before any of the app's own choices make sense.</p>
+  <p class="sources"><b>Sources</b>docs/bulletin-guide.md · docs/glossary.md · reference_data/CAAML_SCHEMA.md</p>
+</article>
+
+<article>
+  <span class="area">Data</span><span class="axis axis-technical">Technical</span>
+  <h2>Every coordinate means something different</h2>
+  <p class="hook">A saved pin, a resort, a field report and a warning region all
+  carry a latitude and a longitude, and you may conclude something different
+  from each.</p>
+  <p>The post is built around one question: for any coordinate on any record,
+  is it exact or approximate, who derived it, and what may you safely read into
+  it? A pin is exact because a person dropped it. A resort's coordinate is exact
+  as a <em>village</em> — it was geocoded from the resort's name, so it is not
+  the summit and not the car park. A region's centre is a polygon centroid and
+  means nothing on the ground. An elevation is a lookup against a terrain model.</p>
+  <p>The sharpest case is a field report, which carries both the position the
+  reporter submitted and the raw fix the device measured. Keeping both is
+  deliberate: the difference between them records how far someone dragged the
+  pin, which is exactly what tells you how much to trust the report. That is a
+  good general lesson about storing provenance beside a value rather than
+  overwriting it.</p>
+  <p class="sources"><b>Sources</b>docs/locations.md · apps/locations/models.py · docs/decisions/location-is-the-primitive.md · docs/decisions/pure-python-point-in-polygon.md</p>
+</article>
+
+<article>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span>
+  <h2>Reading a bug off a phone with no devtools</h2>
+  <p class="hook">A region reports as downloaded and the map is blank. Six things
+  must all be true for it to draw, and on a phone in a valley not one of them is
+  observable.</p>
+  <p>The post starts from a property that sounds like a defect and is not: the
+  map module has 39 places that swallow an error silently, and the service worker
+  has 27. That silence is correct — a failing cache probe must never break the
+  page someone is standing in a lift queue reading — and it is precisely why a
+  broken download looks identical to a working one right up until the map fails
+  to appear.</p>
+  <p>The answer is a trace you can read on the device that produced it: each link
+  in that chain of six writes a line, so the question stops being "is it broken"
+  and becomes "which link". A useful post for anyone shipping a progressive web
+  app, where the hardest failures happen on a device you cannot attach a
+  debugger to.</p>
+  <p class="sources"><b>Sources</b>docs/debug-log.md · static/js/sw.js · static/js/map.js</p>
+</article>
+
+<article>
+  <span class="area">Engineering</span><span class="axis axis-technical">Technical</span>
+  <h2>Testing an app that has to work with no signal</h2>
+  <p class="hook">Download a region, switch the network off, open the map on a
+  mountain. Do you see a map? None of the normal test layers can answer that.</p>
+  <p>The post explains why a fourth test layer exists and why it deliberately
+  breaks every rule the others enforce. The browser suite that runs on every pull
+  request is capped at a couple of dozen short smoke tests; this one runs for
+  minutes, downloads several hundred real tiles from a live origin, and puts a
+  real network boundary in front of the browser so "offline" means offline rather
+  than a mocked flag.</p>
+  <p>So it runs weekly, off the merge path, against a subject drawn fresh each
+  week — with the draw seeded by the week number, so a red run can be reproduced
+  exactly. The general point is worth making plainly: not every valuable test
+  belongs on the critical path, and the ones that do not still need somewhere to
+  live and a budget of their own.</p>
+  <p class="sources"><b>Sources</b>docs/offline-assurance.md · docs/client-side-tests.md · tests/offline/</p>
+</article>
+
+<article>
+  <span class="area">Design</span><span class="axis axis-product">Product</span>
+  <h2>The colours that are not ours to choose</h2>
+  <p class="hook">Snowdesk has a dark mode. Five of its colours refuse to
+  participate.</p>
+  <p>The danger scale's colours are set by the European avalanche services and
+  mean the same thing on every bulletin in the Alps, so they are theme-invariant:
+  everything else on the page inverts around them, and they stay put. The post
+  uses that as the way into a small design system — tokens declared once,
+  overridden for dark mode, with the regulated ones carved out.</p>
+  <p>Two more rules earn their place. One text colour carries a note saying it
+  sits at 4.67:1 against the page and must not be dimmed further, which is what
+  an accessibility floor looks like when it is written down rather than assumed.
+  And in any row where horizontal space is contested, more than one control
+  collapses into a menu — because past that point the row's own name is what
+  gets squeezed, and the name is what people scan a list by.</p>
+  <p class="sources"><b>Sources</b>docs/design-system.md · src/css/main.css</p>
+</article>
+
+<article>
+  <span class="area">Platform</span><span class="axis axis-technical">Technical</span>
+  <h2>The strings the extractor cannot see</h2>
+  <p class="hook">Django's translation tooling reads your templates and your
+  Python. It does not read your JavaScript, and it does not tell you so.</p>
+  <p>A short, practical post about a silent failure mode in any server-rendered
+  app with a real client side: a string written as a JavaScript literal never
+  reaches the message catalogue, so it ships in English to every locale and
+  nothing in the build complains. Around 45 had quietly accumulated before they
+  were marshalled into a single server-rendered surface the client reads from.</p>
+  <p>It can close on the other half of the discipline, which is knowing what not
+  to translate: the forecaster's own prose arrives from the provider and is not
+  ours to reword, log lines are for operators, and the staff admin is English by
+  design.</p>
+  <p class="sources"><b>Sources</b>docs/i18n.md · bin/i18n-lint · locale/</p>
+</article>
+
+<article>
+  <span class="area">Engineering</span><span class="axis axis-technical">Technical</span>
+  <h2>Measuring what production actually serves</h2>
+  <p class="hook">The performance audit was scoring roughly 23,000 lines of
+  JavaScript that no visitor has ever downloaded.</p>
+  <p>A post about a budget measuring the wrong thing. Accessibility and search
+  scores block merge; performance and best practices report. But the audit ran
+  against the source tree, while deployment minifies on the way out — so every
+  number described a version of the site nobody receives, and the one stylesheet
+  in the critical path had no build step touching it at all.</p>
+  <p>The fix is unglamorous and the moral is general: an automated gate is only
+  as useful as the fidelity of what it measures, and the local audit and the
+  deploy have to run the same steps or the gate is theatre.</p>
+  <p class="sources"><b>Sources</b>docs/lighthouse.md · lighthouserc.json · bin/minify-js · bin/minify-css</p>
+</article>
+
+<article>
+  <span class="area">Offline</span><span class="axis axis-technical">Technical</span>
+  <h2>One database in the browser</h2>
+  <p class="hook">Everything Snowdesk remembers on your device — the outbox, your
+  saved pins, the sync log, the debug trace — lives in one small database with
+  one way in.</p>
+  <p>The post covers the foundation the rest of the client is built on: a single
+  wrapper over IndexedDB exposing exactly one global, loaded first on every page,
+  with a handful of long-lived stores added over time as features needed them.
+  Every store that has ever existed is still created on open and none has ever
+  been removed, which is the cheapest possible answer to migrating data that
+  lives on someone else's phone and may not be opened for a season.</p>
+  <p>There is a nice naming detail to explain: the version number in the database
+  name is a namespace rather than a schema version, and bumping it would mean
+  abandoning everything already on the device. Schema changes go through a
+  separate counter.</p>
+  <p class="sources"><b>Sources</b>docs/indexeddb-scaffolding.md · static/js/db.js</p>
+</article>
+
+<div class="group">
+  <h2>Artifacts read and set aside</h2>
+  <p>Not posts, with the reason. Recorded so the next run does not re-litigate
+  them.</p>
+</div>
+
+<article>
+  <span class="area">Set aside</span>
+  <h2>Route Leg Breakdown</h2>
+  <p class="exists"><b>Not a post — yet</b><a href="https://claude.ai/artifact/3GCc6BE9ET3P1UsLRchQLC">claude.ai/artifact/3GCc6BE9ET3P1UsLRchQLC</a> — an interactive design mock for a feature that has not shipped. Its own provenance block says every terrain figure in it is illustrative rather than measured, and the whole thing is driven by JavaScript. A post describes what shipped, so this waits.</p>
+  <p>Worth keeping in view, because the reasoning notes are the best short
+  writing in the collection and will survive into whatever does ship. A leg is
+  an activity rather than a change of elevation sign, which is what makes a nine
+  kilometre descent one leg. And the lane that reports terrain reports ground,
+  never a grade, because there is no published difficulty grade derivable from
+  an arbitrary GPX — "a computed grade would be a recommendation wearing a
+  number".</p>
+</article>
+
+<article>
+  <span class="area">Set aside</span>
+  <h2>Snowdesk — route overview</h2>
+  <p class="exists"><b>Not prose</b><a href="https://claude.ai/artifact/5CkdzZN3frDgp1NvCXYL8j">claude.ai/artifact/5CkdzZN3frDgp1NvCXYL8j</a> — a design canvas of artboards rather than an article. It is a working surface for designing the route panel, and there is nothing to port.</p>
+</article>
+
+<article>
+  <span class="area">Set aside</span>
+  <h2>Choosing an Avalanche App</h2>
+  <p class="exists"><b>Retired</b><a href="https://claude.ai/artifact/H5PgU5tQUNtN4Ap8PpCNzf">claude.ai/artifact/H5PgU5tQUNtN4Ap8PpCNzf</a> — now a tombstone pointing at <code>snowdesk.info/compare/</code>, where a comparison can be kept current instead of ageing in a shared link.</p>
+  <p>It does contain one small story, if you ever want it. The page was retired
+  rather than updated because it stated two things about Snowdesk that were
+  wrong — no slope-angle layer, no national topographic basemaps — both taken
+  from an internal research note that had gone stale, and both true of the app
+  when the note was written. That is a good short piece about the half-life of
+  your own documentation, but it belongs to the app's marketing rather than to
+  this blog.</p>
+</article>
+
+<footer class="page">
+  <h2>Deliberately not on this list</h2>
+  <ul>
+    <li><b>Web Push.</b> Wired end to end and genuinely interesting — Apple's
+    declarative payloads are rendered by the OS even when the service worker has
+    been evicted — but it is a staff-only spike behind a demo page. Worth a post
+    once it reaches real subscribers.</li>
+    <li><b>Folded into an entry above, not dropped</b> — <code>offline-first.md</code>
+    (into the service-worker post), <code>meteofrance-mapping.md</code> (three
+    countries), <code>day_character_rules_spec.md</code> (the day sentence),
+    <code>map-page-functional-spec.md</code> (the map), <code>user-journeys.md</code>
+    (two documents and a map), <code>query-counts.md</code> (measuring what
+    production serves). Each is a second source for a post rather than a post of
+    its own.</li>
+    <li><b>Operator and process docs</b> — <code>management-commands.md</code>,
+    <code>deployment.md</code>, <code>feature-flags.md</code>,
+    <code>worktrees.md</code>, <code>coding-standards.md</code>,
+    <code>linear-workflow.md</code>, <code>claude-code-hooks.md</code>,
+    <code>testing-scenarios.md</code>, <code>auth-testing-checklist.md</code>,
+    <code>environment-network-allowlist.md</code>,
+    <code>meteofrance-live-ingest.md</code>, <code>async-operations.md</code>.
+    Instructions for running the project; nobody outside it has the problem they
+    solve.</li>
+    <li><b>Reference and internal material</b> — <code>glossary.md</code>,
+    <code>competitors.md</code>, <code>useful-repos.md</code>,
+    <code>churn-report.md</code>, <code>site-banners.md</code>,
+    <code>nav_implementation_spec.md</code>. Lookup tables and internal
+    positioning, with no argument to make to a reader.</li>
+    <li><b>Anything not shipped.</b> A post describes the app as it was on the
+    day it was written.</li>
+    <li><b>Artifacts not opened for this list</b> — Skinning Row Variants, the
+    Command Inventory, the Test Run, the Churn Ledger, the weekly page audits,
+    and the two superseded versions of Inside the Snowdesk Map. Judged internal
+    from their titles and dates rather than read. If any of them is better than
+    that, it is the gap in this page.</li>
+  </ul>
+  <h2>Using this list</h2>
+  <p>Pick an entry, then read its sources before writing — the docs carry
+  <code>last-reviewed</code> dates and the code is the tiebreaker. Record what
+  the post drew on in its <code>sources:</code> front matter so the next one does
+  not repeat it, and vary the area: offline is the most heavily documented part
+  of the app and will otherwise take every slot.</p>
+</footer>
+
+</div>
+</body>
+</html>

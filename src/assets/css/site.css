@@ -232,3 +232,117 @@ main {
   font-size: 0.9375rem;
   margin-top: 0.5rem;
 }
+
+/* Tables. Markdown alignment syntax emits inline styles, which
+   html-validate rejects, so tables are left-aligned throughout and a
+   numeric column is simply a column. */
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9375rem;
+}
+
+.post-body th,
+.post-body td {
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.post-body th {
+  color: var(--text-3);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom-color: var(--text-3);
+  white-space: nowrap;
+}
+
+.post-body tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Byline. Every post is written by Claude and edited by the site author;
+   post.njk states both, and the Article JSON-LD says the same thing. */
+.post-writer {
+  display: inline-block;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  margin-right: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+/* Editor's note — the site author's voice, deliberately not the post's. */
+.editor-note {
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-2);
+}
+
+.editor-note-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.editor-note > :last-child {
+  margin-bottom: 0;
+}
+
+/* Audience labels. A post leans technical or product — see the blog-post
+   skill — and says so. The two colours are distinguishable, but the label
+   text carries the meaning on its own for anyone who cannot tell them apart. */
+.post-audience {
+  margin: 0 0 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.audience {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.05em 0.45em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+.audience-technical {
+  color: #1d6a4f;
+}
+
+.audience-product {
+  color: #8a4a12;
+}
+
+@media (prefers-color-scheme: dark) {
+  .audience-technical {
+    color: #6fc3a0;
+  }
+
+  .audience-product {
+    color: #d8a05a;
+  }
+}
+
+.post-list .audience {
+  margin-left: 0.35rem;
+  vertical-align: 1px;
+}

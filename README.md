@@ -34,10 +34,18 @@ npm start          # http://localhost:8080, live reload, drafts included
    title: The map
    description: One or two sentences. Used as the meta description, the lede, the feed summary and in llms.txt.
    date: 2026-10-01
+   audience: [technical]   # or [product], or both — required, build fails without it
    # updated: 2026-11-15   # optional; shown on the post and used as dateModified / lastmod
    # draft: true           # optional; built by `npm start` and CI, never published
    ---
    ```
+
+   `audience` is the axis the post leans on. **Technical** is for people who
+   build software and want the mechanism; **product** is for people who use apps
+   of this kind and want to know how a feature was designed. Almost nobody is
+   both, so a post serves one properly rather than half-serving each. The label
+   is shown on the post and the index, and goes into the `Article` JSON-LD. An
+   unknown or missing value fails the build.
 
 3. Write the post in Markdown. Raw HTML is fine inline, so an existing HTML
    document can be pasted into a `.html` post (drop its `<html>`, `<head>` and
@@ -50,6 +58,21 @@ npm start          # http://localhost:8080, live reload, drafts included
 
    This renders a lazy-loaded `youtube-nocookie.com` embed **and** the
    `VideoObject` JSON-LD search engines need to index the video from the post.
+
+5. Add an editorial note with the `editor` shortcode. It takes Markdown, and a
+   post may carry several — put each next to the passage it answers:
+
+   ```njk
+   {% editor %}
+   A correction, a disagreement, or the context only the editor has.
+   {% endeditor %}
+   ```
+
+   Posts are written by Claude and edited by the site author: every post carries
+   that byline, and the `Article` JSON-LD names Claude as `author` and the site
+   author as `editor`. Both read from `src/_data/site.js`, so the page and its
+   structured data cannot drift apart. The note is the one part of a post that
+   speaks in the editor's voice.
 
 The post layout, index, Atom feed, `sitemap.xml` and `llms.txt` all pick the post
 up automatically. There is nothing else to edit.

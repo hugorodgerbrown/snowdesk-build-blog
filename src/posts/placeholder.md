@@ -1,7 +1,8 @@
 ---
 title: Placeholder post
-description: A draft that exercises every piece of the post layout so CI validates it. Never published.
+description: A draft that exercises every piece of the post layout — byline, youtube embed, editor's note and a table — so CI validates them. Never published.
 date: 2026-09-18
+audience: [technical, product]
 draft: true
 permalink: /placeholder/
 ---
@@ -18,3 +19,16 @@ A paragraph with a [link to the app](https://snowdesk.info/) and some `inline co
 
 - A list item
 - Another list item
+
+{% editor %}
+An editor's note, in the site author's own voice rather than the post's. It
+takes **Markdown**, including [a link](https://snowdesk.info/), and more than
+one paragraph.
+
+A post may carry several, each next to the passage it answers.
+{% endeditor %}
+
+| A table | Because | Posts use them |
+|---|---|---|
+| `static` | 7,791 | 96.4% |
+| `rising` | 189 | 2.3% |

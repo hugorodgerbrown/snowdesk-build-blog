@@ -2,6 +2,7 @@
 layout: layouts/base.njk
 ---
 {%- set postUrl = page.url | siteUrl %}
+{%- set audiences = audience | audienceLabels(title) %}
 <script type="application/ld+json">{{ {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -12,7 +13,9 @@ layout: layouts/base.njk
   "url": postUrl,
   "mainEntityOfPage": postUrl,
   "inLanguage": site.language,
-  "author": { "@type": "Person", "name": site.author.name },
+  "author": { "@type": "Organization", "name": site.writer.name, "url": site.writer.url },
+  "editor": { "@type": "Person", "name": site.author.name },
+  "audience": audiences | audienceSchema,
   "publisher": { "@id": site.app.url + "#organization" },
   "isPartOf": { "@id": site.url + "#website" },
   "about": { "@type": "SoftwareApplication", "name": site.app.name, "url": site.app.url, "applicationCategory": "TravelApplication" }
@@ -20,9 +23,14 @@ layout: layouts/base.njk
 <article class="post">
   <header class="post-header">
     <h1>{{ title }}</h1>
+    <p class="post-audience">
+      {%- for a in audiences %}<span class="audience audience-{{ a.name }}">{{ a.label }}</span>{% endfor %}
+    </p>
     <p class="post-meta">
+      <span class="post-writer">Written by {{ site.writer.name }}</span>
       <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
       {%- if updated %} · updated <time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time>{% endif %}
+      · edited by {{ site.author.name }}
     </p>
     {%- if description %}
     <p class="post-lede">{{ description }}</p>
