@@ -444,6 +444,36 @@
 </article>
 
 <div class="group">
+  <h2>From the app itself</h2>
+  <p>Not a document — a feature built to explain the product, whose code comments
+  carry the failures that shaped it.</p>
+</div>
+
+<article>
+  <span class="area">Map</span><span class="axis axis-technical">Technical</span>
+  <h2>The map photographs itself</h2>
+  <p class="hook">Add <code>?layers=exploded</code> to the map URL and it comes
+  apart into a ladder of sheets, then rebuilds itself a rung at a time. Every
+  sheet is a photograph of the live renderer.</p>
+  <p>To make one, the code hides every layer except the tier it wants, waits for
+  a frame, and reads the canvas out as a PNG. That is four lines of intent and
+  three hard problems, each recorded in the comments. Boot-time layer restores
+  are fire-and-forget, so a layer landed in a step that had already hidden
+  everything and the basemap sheet came out with boundaries and resort pins on
+  it — loading is not showing. Reading the style once up front misses tiers
+  installed later, and restoring from that snapshot leaves them hidden for the
+  rest of the session with nothing left to reinstate them, so each layer's state
+  is recorded the first time it is seen. And a visitor who follows only France
+  has Switzerland filtered out, so every Swiss sheet would photograph blank; the
+  capture forces it on and puts the preference back without writing storage.</p>
+  <p>The closing argument writes itself: an explainer built from photographs of
+  the real renderer cannot quietly drift from what it explains, and where it
+  could, it fails loudly — a rung naming a layer that no longer exists stops the
+  build rather than showing a picture of a map we do not draw.</p>
+  <p class="sources"><b>Sources</b>static/js/map_exploded.js · static/css/map_exploded.css · apps/public/templates/public/home.html</p>
+</article>
+
+<div class="group">
   <h2>From the repo docs</h2>
   <p>Ideas rather than drafts, each drawn from an explainer in the app repo's
   <code>docs/</code>. These need writing from the source, following the model
