@@ -111,6 +111,19 @@ sources:
 the next person writing a post: it records what this one drew on, and is how
 Step 1 checks a topic has not already been used. The layouts ignore it.
 
+**The `editor` shortcode is not yours to use.** Every post carries a byline
+saying Claude wrote it and Hugo edited it, and the editor's note is the one
+place on the page that speaks in Hugo's voice — a correction, a disagreement,
+the context only he has. Writing one yourself puts words in his mouth, so leave
+it out entirely and let him add it during review. It exists in
+`eleventy.config.js` and is exercised by the placeholder post:
+
+```njk
+{% editor %}
+His comment, as Markdown.
+{% endeditor %}
+```
+
 Video only ever goes in through the `youtube` shortcode, and only when Hugo has
 given you a real video ID — never invent one, and never commit a video file:
 

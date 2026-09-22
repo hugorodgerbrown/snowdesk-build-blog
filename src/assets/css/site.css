@@ -264,3 +264,41 @@ main {
 .post-body tbody tr:last-child td {
   border-bottom: 0;
 }
+
+/* Byline. Every post is written by Claude and edited by the site author;
+   post.njk states both, and the Article JSON-LD says the same thing. */
+.post-writer {
+  display: inline-block;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  margin-right: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+/* Editor's note — the site author's voice, deliberately not the post's. */
+.editor-note {
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-2);
+}
+
+.editor-note-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.editor-note > :last-child {
+  margin-bottom: 0;
+}

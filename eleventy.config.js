@@ -62,6 +62,37 @@ function youtube(id, title, uploadDate, description = "") {
 }
 
 /**
+ * Render an editor's note — the site author's own commentary on a post,
+ * set apart from the post's voice.
+ *
+ * Usage in a post:
+ *
+ *   {% editor %}
+ *   The comment, written as Markdown.
+ *   {% endeditor %}
+ *
+ * The blank lines around `content` are load-bearing. A block-level HTML tag
+ * opens a CommonMark HTML block that ends at the first blank line, so the
+ * content after it is parsed as Markdown and the closing tag opens a block of
+ * its own. Without them the note renders as literal text, links and all.
+ *
+ * @param {string} content Inner Markdown.
+ * @param {string} [label] Heading shown above the note.
+ * @returns {string}
+ */
+function editor(content, label = "Editor's note") {
+  if (!content || !content.trim()) {
+    throw new Error("editor shortcode: the note is empty");
+  }
+  return `<aside class="editor-note">
+<p class="editor-note-label">${escapeAttr(label)}</p>
+
+${content.trim()}
+
+</aside>`;
+}
+
+/**
  * Eleventy entry point.
  * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
  */
@@ -78,6 +109,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg" });
 
   eleventyConfig.addShortcode("youtube", youtube);
+  eleventyConfig.addPairedShortcode("editor", editor);
 
   eleventyConfig.addFilter("isoDate", (date) => new Date(date).toISOString().slice(0, 10));
   eleventyConfig.addFilter("readableDate", (date) =>

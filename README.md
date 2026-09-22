@@ -51,6 +51,21 @@ npm start          # http://localhost:8080, live reload, drafts included
    This renders a lazy-loaded `youtube-nocookie.com` embed **and** the
    `VideoObject` JSON-LD search engines need to index the video from the post.
 
+5. Add an editorial note with the `editor` shortcode. It takes Markdown, and a
+   post may carry several — put each next to the passage it answers:
+
+   ```njk
+   {% editor %}
+   A correction, a disagreement, or the context only the editor has.
+   {% endeditor %}
+   ```
+
+   Posts are written by Claude and edited by the site author: every post carries
+   that byline, and the `Article` JSON-LD names Claude as `author` and the site
+   author as `editor`. Both read from `src/_data/site.js`, so the page and its
+   structured data cannot drift apart. The note is the one part of a post that
+   speaks in the editor's voice.
+
 The post layout, index, Atom feed, `sitemap.xml` and `llms.txt` all pick the post
 up automatically. There is nothing else to edit.
 
