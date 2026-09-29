@@ -1,15 +1,14 @@
 ---
-title: "The altimeter was lying"
+title: "Reading route heights from the terrain model"
 description: A GPX track's heights come from the recording device's barometric altimeter, which drifts with the weather. On one of our test tracks it was 737 m above the ground within 1.5 km. Snowdesk now takes a route's heights from the terrain model instead.
 date: 2026-09-29
 written_by: claude
 ---
 
-Snowdesk builds a saved route's profile, its legs (climbs and descents)
-and its ascent and descent totals from the route's heights. Until release
-`2026.09.29` those were the heights recorded in the GPX file. This post
-looks at how far recorded heights can stray from the ground, and what
-Snowdesk does about it now.
+Snowdesk shows a saved route's profile, its legs (climbs and descents) and
+its ascent and descent totals. All of them are built on the route's
+heights. Until release `2026.09.29` those heights came from the GPX file,
+and on some tracks they were hundreds of metres wrong.
 
 ## Where the heights came from
 
@@ -92,6 +91,6 @@ On Mont Fort – Backside the route header now shows an ascent of 337 m, the
 terrain model's figure, rather than the 478.8 m stored from the device.
 
 <figure class="shots">
-<img class="shot-phone" src="/assets/img/the-altimeter-was-lying/route-rail-empty.webp" width="780" height="1688" loading="lazy" alt="Mont Fort – Backside open on the map on a phone. The route header reads Ascend 337 m · descend 1,906 m and 12.9 km · 3.4 km steep terrain above the height profile.">
+<img class="shot-phone" src="/assets/img/route-heights-from-the-terrain-model/route-rail-empty.webp" width="780" height="1688" loading="lazy" alt="Mont Fort – Backside open on the map on a phone. The route header reads Ascend 337 m · descend 1,906 m and 12.9 km · 3.4 km steep terrain above the height profile.">
 <figcaption>Mont Fort – Backside on a phone, with ascent and descent read from the terrain model.</figcaption>
 </figure>
