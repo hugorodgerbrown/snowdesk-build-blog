@@ -25,8 +25,8 @@ me*. The two are chosen separately, and this post is about the sentence.
 
 There are eighty sentences. The code fills in the names of the avalanche
 problems and, on a day the level rises or falls, how it moved. The rest of each
-sentence — the part that tells you what the day means — is written out, one
-sentence per combination, rather than generated. That sounds like an oversight
+sentence — the part that tells you what the day means — is written out rather
+than generated. That sounds like an oversight
 and it is the whole design.
 
 ## What came before
@@ -36,11 +36,11 @@ five sentences covering the entire archive. The Hard-to-read day's, "persistent
 or gliding-snow problems can mask the real risk", went out on around 4,300
 pages. It appeared whether the
 problem was persistent weak layers or gliding snow. Whether the danger was
-moderate or considerable. Whether it held steady all day or doubled by
-mid-afternoon.
+moderate or considerable. Whether it held steady all day or rose a level
+by mid-afternoon.
 
 It was true every time. It described the rule that had picked the label rather
-than the day in front of you, which is a different thing, and a reader who
+than the day in front of you, and a reader who
 checks the page two days running and sees the same sentence under two different
 bulletins learns to stop reading it.
 
@@ -48,8 +48,8 @@ bulletins learns to stop reading it.
 
 The sentence is chosen by asking three things about the day.
 
-**How does it move?** Most bulletins give one rating for the whole day; some
-split it, with a separate rating for the morning and the afternoon. Four
+**How does it move?** Some bulletins split the day, with separate morning and
+afternoon ratings. Four
 possibilities: *static*, where the level and the kinds of problem named hold all
 day; *rising*, where the level climbs into the afternoon; *easing*, where it
 falls; and *shifting*, where the number holds but the problem underneath it
@@ -69,9 +69,8 @@ tells you about today. Name only the first kind and the day is *readable*; only
 the second and it is *hidden*; both and it is *mixed*; nothing at all and it is
 *quiet*.
 
-Four by five by four is eighty combinations, and there is a sentence for each,
-written out as one table in `apps/bulletins/services/day_summary.py`. The page
-looks its sentence up there.
+Four by five by four is eighty combinations, each with its sentence in one
+table in `apps/bulletins/services/day_summary.py`.
 
 There is no fallback. A combination missing from the table would stop the
 bulletin page loading, rather than show a generic sentence, because a
@@ -83,7 +82,7 @@ because a duplicate means one was written twice and another was missed.
 
 ## Why each one is written out
 
-Going further than filling in names is easy to imagine: add a stock ending for
+The alternative is easy to imagine: add a stock ending for
 each of the four answers to *can you see the problem?*, and you have a sentence
 generator that covers all eighty combinations and any future ones for free.
 
@@ -96,8 +95,8 @@ readable problem, a wind slab you can see at the surface:
 > High, with wind slab at the surface — visible everywhere, and past what route
 > choice can offset.
 
-The same visible problem means opposite things. At moderate, being able to see
-it is the reason you can go and look. At high, being able to see it no longer
+The same visible problem means opposite things. At moderate, what you can see
+tells you which slopes to avoid before you commit. At high, being able to see it no longer
 helps, because there is too much of it for any choice of line to avoid. A stock
 ending for *readable* would have to say one of those on both days, and on one of
 them it would be dangerous.
@@ -134,15 +133,19 @@ We ran all 8,080 bulletins in the archive through the same three questions.
 | Shifting | 78 | 1.0% |
 | Easing | 22 | 0.3% |
 
-Ninety-six pages in a hundred show one of the twenty static sentences, so those
-twenty are what most readers will ever see. The rest of the table matters on
-the days a bulletin splits. There are 312 of those. On 211 the level rises or
-eases; on the other 101 it holds.
+Ninety-six pages in a hundred show one of the twenty static sentences. The rest
+of the table matters on the 312 days a bulletin splits. On 211 the level rises
+or eases; on the other 101 it holds, and 23 of those count as static, for
+reasons below.
+
+Of the 211, 45 move without the number changing. SLF, the Swiss service, adds a
+plus or minus to its ratings, and a day can go from moderate to moderate-plus.
+Printing "moderate this morning, moderate by afternoon" would read as a fault,
+so those days open "Deteriorating within moderate" instead.
 
 **A split day is the sun getting to work.** On 254 of the 312, the arriving
-problem is wet snow. A reader who understands that one fact has understood most
-of what a changing day means — and what the sentence on a rising day
-with wet snow tells them:
+problem is wet snow. That one fact explains most changing days, and the
+sentence a rising day with wet snow gets:
 
 > Deteriorating: moderate this morning, considerable by afternoon, with wet snow
 > at the surface — turn round before it gets there.
@@ -161,15 +164,15 @@ weak layers for wet snow by afternoon reads:
 ## What it does not catch
 
 Of the 101 split days whose level holds, 78 name different kinds of problem in
-the morning and the afternoon and are classified as shifting. Six carry two
-identical ratings — the forecasting service that issued the bulletin, which
-Snowdesk does not control, stamping one rating with two time periods — and are
-correctly treated as static.
+the morning and the afternoon and are classified as shifting. Six have identical
+halves, the same rating and the same problems. The forecasting service that
+issued the bulletin, which Snowdesk does not control, stamped one rating with
+two time periods, and those days are correctly treated as static.
 
 The remaining 17 keep the same problem types on different aspects or elevations —
 wet snow retreating from sunny slopes to below a line, say. They are treated as
 static too, so the footprint moves and the sentence does not mention it. That is
-a known under-report rather than a solved problem, and it is deliberate in this
+a known under-report, and deliberate in this
 direction: the sentence omits something true rather than asserting something
 false. When the reader is deciding where to ski, those two failures are not
 equivalent.
