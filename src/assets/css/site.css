@@ -265,3 +265,44 @@ figure.chart figcaption {
   font-size: 0.875rem;
   color: var(--text-3);
 }
+
+/* Screenshot figures: phone captures are tall, so they sit side by side
+   (or alone, capped) on a wide column and stack on a phone. */
+figure.shots {
+  margin: 2rem 0;
+}
+
+figure.shots img {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.shots-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.shots-row img,
+.shot-phone {
+  max-width: 360px;
+  width: 100%;
+}
+
+.shot-phone {
+  margin: 0 auto;
+}
+
+@media (max-width: 36rem) {
+  .shots-row {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+figure.shots figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-3);
+}
