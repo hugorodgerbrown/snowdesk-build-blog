@@ -112,7 +112,7 @@ Neither gives you anything to see. At low, that means care in a few places; at
 high, a slope can release from a distance, before you reach it. A stock ending for *hidden* could not carry both.
 
 Everything after the dash is a judgement about avalanche safety, and a stock
-ending cannot make it from the three answers.
+ending picked by one answer cannot make it.
 
 That has a cost. A new answer to how the day moves, or to whether you can see
 the problem, means twenty more sentences to write. The table also exists
@@ -172,8 +172,7 @@ equivalent.
 The easing sentences are the exception. They were written for the swap every
 falling day in the archive shows, and the code does not check for it. A day
 whose danger receded would get one of them and be told the problem swapped
-when it had cleared — the one place the table could assert something false. No
-such day has happened yet.
+when it had cleared, which is false. No such day has happened yet.
 
 ## Written before anyone needs them
 
