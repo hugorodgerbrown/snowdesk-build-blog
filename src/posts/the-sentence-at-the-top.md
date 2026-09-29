@@ -76,16 +76,15 @@ looks its sentence up there.
 There is no fallback. A combination missing from the table would stop the
 bulletin page loading at all, rather than show a generic sentence, because a
 generic sentence is the failure the table was built to fix. A test checks that
-all eighty are filled, so that cannot ship.
+all eighty are filled. Others check what goes in them: a quiet day's sentence
+may not name a problem, and every other one must, so a day with a named problem
+is never described without naming it. No two combinations may share a sentence,
+because a duplicate means one was written twice and another was missed.
 
 ## Why a person wrote them
 
-Part of each sentence is templated already. The problem names are spliced in,
-and a rising or easing day opens with a generated clause saying how the level
-moved — "Easing: considerable this morning, moderate by afternoon", or "Easing
-within moderate" when SLF, the Swiss avalanche service, has moved only the plus
-or minus on its rating. Going the rest of the way is easy to imagine: add a stock ending for each of
-the four answers to *can you see the problem?*, and you have a sentence
+Going further than filling in names is easy to imagine: add a stock ending for
+each of the four answers to *can you see the problem?*, and you have a sentence
 generator that covers all eighty combinations and any future ones for free.
 
 It fails on the first pair you compare. Here are two days with the same
@@ -103,22 +102,26 @@ helps, because there is too much of it for any choice of line to avoid. A stock
 ending for *readable* would have to say one of those on both days, and on one of
 them it would be dangerous.
 
-A buried problem gets advice a readable one never can, as in the sentence at the
-top of this post: no warning underfoot, so terrain choice is the only control
-left.
+A buried problem turns the same way:
+
+> Low, with persistent weak layers buried out of sight — few places, and nothing
+> at the surface to mark them.
+
+> High, with persistent weak layers buried — remote triggering is expected, and
+> nothing at the surface will warn you.
+
+Both say nothing at the surface will help. At low that is a reason for care in a
+few places; at high it means a slope can release from a distance, before you
+reach it. A stock ending for *hidden* could not carry both.
 
 Everything after the dash is a judgement about avalanche safety. No rule turns
 the three answers into it; someone had to decide what they mean together, eighty
 times.
 
 That has a cost. A new answer to how the day moves, or to whether you can see
-the problem, means twenty more sentences to write by hand. The table also exists only in English, so a second
-language means translating eighty judgements, not eighty strings.
-
-The tests hold the table to that. A quiet day's sentence may not name a problem,
-and every other one must, so no day is described without saying what the danger
-is. No two combinations may share a sentence, because a duplicate means one was
-written twice and another was missed.
+the problem, means twenty more sentences to write by hand. The table also exists
+only in English, so a second language means translating eighty judgements, not
+eighty strings.
 
 ## What the archive says
 
@@ -136,11 +139,16 @@ twenty are what most readers will ever see. The rest of the table matters on
 the days a bulletin splits. There are 312 of those. On 211 the level rises or
 eases; on the other 101 it holds.
 
-Two findings from the split days changed what the sentences say.
+Two findings from the split days: one says what a changing day usually is, the
+other changed what the sentences say.
 
 **A split day is the sun getting to work.** On 254 of the 312, the arriving
-problem is wet snow. Nothing else comes close, and a reader who understands that
-one fact has understood most of what a changing day means in practice.
+problem is wet snow. A reader who understands that one fact has understood most
+of what a changing day means in practice — and what the sentence on a rising day
+with wet snow tells them:
+
+> Deteriorating: moderate this morning, considerable by afternoon, with wet snow
+> at the surface — turn round before it gets there.
 
 **No falling day is an all-clear.** All 22 days whose level falls do so by
 replacing a dry problem with wet snow. The number drops while the hazard swaps
