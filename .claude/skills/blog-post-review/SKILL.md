@@ -27,6 +27,38 @@ The house standard is the writing skill's own guide, not a second copy of it:
 Read both before the post. Where this skill and those files disagree, those
 files win; they are what the writer was told.
 
+## Step 0 — read the earlier rounds
+
+A post is usually reviewed more than once. Each report is saved to
+`.reviews/<slug>/round-NN.md` (gitignored, local to the checkout), where
+`<slug>` is the post's file name without `.md`:
+
+```bash
+ls .reviews/<slug>/ 2>/dev/null
+```
+
+If earlier rounds exist, read all of them before the post. They are the record
+of what has been raised and how the writer answered it, and they change what
+this round may report:
+
+- **Settled points stay settled.** Do not re-raise a finding an earlier round
+  made and the draft has since resolved, and do not ask for the reverse of a
+  change an earlier round asked for. If you think an earlier resolution was
+  wrong, say so once under **Consider**, marked *reversal of round N*, with the
+  reason. It never goes under Must fix or Should fix.
+- **A fix that broke something is new.** If resolving an earlier finding
+  introduced an error, report the error as a finding in its own right and name
+  the round whose fix caused it.
+- **Questions only the editor can answer are asked once.** Who wrote something,
+  whether work is planned, what the author intended — if an earlier round
+  already put it to the editor, carry it under **For the editor** and do not
+  let it hold the verdict back.
+- **Raise the bar as the rounds go on.** From the third round, a Should fix has
+  to be something that would make a reader stop, misread or doubt a claim.
+  Improvements short of that go under Consider.
+
+With no earlier rounds, this step is a no-op.
+
 ## Step 1 — read it as a reader
 
 Read the post once, top to bottom, without taking notes. Then write down, for
@@ -177,6 +209,11 @@ writer should act on; fifteen findings is a lot for 1,200 words.
 **Argument:** <the post's argument in one line, as you read it>
 **Audience:** <declared> — <served / leans the other way / split between both>
 **Stopped reading at:** <section heading, line n> — <why> (or "nowhere")
+**Round:** <N> (<"first review" | "previous: round N-1">)
+
+### Earlier findings
+<Only from round 2 on. One line per Must fix and Should fix from the previous
+round: resolved / not resolved / resolved differently (and whether that works).>
 
 ### Must fix
 1. **<Short label>** (<section heading>, line <n>)
@@ -189,6 +226,10 @@ writer should act on; fifteen findings is a lot for 1,200 words.
 
 ### Consider
 ...
+
+### For the editor
+<Questions the draft cannot settle and the editor can: authorship, intent,
+plans. Carried forward from earlier rounds until answered. Omit if none.>
 
 ### Facts checked
 - <claim> — <file or doc it traces to> ✓
@@ -212,6 +253,13 @@ Severity:
 
 Quote exactly; the writer will search for the text. Refer to lines by the
 numbers in the source file.
+
+**Ready for the editor** means no Must fix and no Should fix remain. Consider
+items and open **For the editor** questions do not hold it back.
+
+Save the report, exactly as returned, to `.reviews/<slug>/round-NN.md`, with
+`NN` one more than the highest round already there (`01` for the first). Create
+the directory if it does not exist. This is the only file a review writes.
 
 ## When asked to apply the edits
 
