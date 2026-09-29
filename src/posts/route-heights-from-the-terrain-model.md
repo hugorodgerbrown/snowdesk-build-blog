@@ -5,10 +5,25 @@ date: 2026-09-29
 written_by: claude
 ---
 
-Snowdesk shows a saved route's profile, its legs (climbs and descents) and
-its ascent and descent totals. All of them are built on the route's
-heights. Until release `2026.09.29` those heights came from the GPX file,
-and on some tracks they were hundreds of metres wrong.
+## Routes and trips
+
+A ski tour is usually planned before anyone sets off. The line is drawn in
+a planning tool such as swisstopo or Skitourenguru, or it is a track that a
+watch or phone recorded on an earlier outing. Either way it leaves as a GPX
+file: a list of points, each with a latitude, a longitude and a height.
+
+In Snowdesk you upload that file and it becomes a **route**. The route is
+drawn on the map over the day's avalanche bulletin, and Snowdesk works out
+the ground under it: the slope angle every 25 m, how much of the line is on
+steep terrain, and the **legs** the tour splits into, its climbs and
+descents. A route is for checking a tour before you go.
+
+A **trip** is a route with a date, a meeting place and a meeting time. It
+can be shared with the rest of the group.
+
+Most of those figures depend on the route's heights. Until release
+`2026.09.29` Snowdesk took them from the GPX file, and on some tracks they
+were hundreds of metres wrong.
 
 ## Where the heights came from
 
