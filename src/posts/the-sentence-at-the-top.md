@@ -30,7 +30,7 @@ It appeared whether the problem was persistent weak layers or gliding snow.
 Whether the danger was moderate or considerable. Whether it held steady all day
 or doubled by mid-afternoon.
 
-It was true every time. It described the rule that had fired rather than the day
+It was true every time. It described the rule that had matched rather than the day
 in front of you, which is a different thing, and a reader who checks the page two
 days running and sees the same sentence under two different bulletins learns to
 stop reading it.
@@ -43,24 +43,34 @@ The sentence is chosen by asking three things about the day.
 `rising`, where the level climbs into the afternoon; `easing`, where it falls;
 and `shifting`, where the number holds but the problem underneath it changes.
 
+A rising or easing sentence opens with the level at each end of the day:
+"Deteriorating: moderate this morning, considerable by afternoon". Swiss ratings
+also carry a subdivision — a plus, a minus — so a day can move without its digit
+changing, and 45 of the 211 rising and easing days in the archive do that.
+Naming both ends on those days would print "moderate this morning, moderate by
+afternoon", which reads as a fault on the page. They open "Deteriorating within
+moderate" instead.
+
 **Where does it end up?** The European danger scale, one to five.
 
 **Can you see the problem?** This is the axis that does the work. Some avalanche
 problems leave evidence on the surface that a competent party can go and read:
-new snow, wind slab, wet snow, cornices. Others do not. Persistent weak layers
-are buried by definition. Gliding snow belongs with them, which is less obvious
+new snow, wind slab, wet snow, cornices. Others do not.
+
+Persistent weak layers are buried by definition. Gliding snow belongs with them, which is less obvious
 until you have watched a glide crack: the cracks show you *where* a slope will go
 and never *when*, so there is nothing to observe that tells you about today. Name
 only the first kind and the day is `readable`; only the second and it is
 `hidden`; both and it is `mixed`; nothing at all and it is `quiet`.
 
-Four by five by four is eighty combinations, and there is a sentence for each. In
-`apps/bulletins/services/day_summary.py` they are laid out as a literal table
-keyed on those three values, and `summary_for` is a lookup into it.
+Four by five by four is eighty combinations, and there is a sentence for each,
+written out as one table in `apps/bulletins/services/day_summary.py`. The page
+looks its sentence up there.
 
-There is no fallback. A combination the table does not hold is not quietly served
-a generic sentence, because a generic sentence is exactly the failure the table
-was built to fix.
+There is no fallback. A combination missing from the table would put an error
+on the page rather than a generic sentence, because a generic sentence is the
+failure the table was built to fix. A test checks that all eighty are filled,
+so that error cannot ship.
 
 ## Why a person wrote them
 
@@ -68,7 +78,7 @@ Part of each sentence is templated already. The problem names are spliced in,
 and a rising or easing day opens with a generated clause — "Easing: considerable
 this morning, moderate by afternoon". Going the rest of the way is easy to
 imagine: add a stock ending for each kind of problem, and you have a sentence
-generator that covers all eighty cells and any future ones for free.
+generator that covers all eighty combinations and any future ones for free.
 
 It produces sentences that are accurate and useless. What a reader needs from
 "considerable, with persistent weak layers buried" is not a restatement of the
@@ -83,21 +93,19 @@ derivable from the three answers that select it, and it is the part a person
 wrote.
 
 So the eighty are written, reviewed, and constrained by tests. One sentence,
-ending in a full stop. A `quiet` cell may not name a problem; every other cell
-must. Only the rising and easing cells may take the transition clause, and every
-one of them has to. No two cells may share a sentence, because a duplicate means
-some combination was written twice and another was missed.
+ending in a full stop. A quiet day's sentence may not name a problem; every
+other one must. Only rising and easing days open with the level at each end, and
+all of them do. No two combinations may share a sentence, because a duplicate
+means one was written twice and another was missed.
 
-One rule is worth repeating for anyone writing interpolated copy anywhere: never
-govern a verb from the problem list. It holds one name or four, so "wind slab
-**is** named" breaks the moment a day names two. The cells use noun phrases
-instead — "with *the problems* at the surface", "with *the problems* in play" —
-which takes the agreement problem off the table rather than solving it.
+The sentences also avoid a trap in any copy that slots in a list. A day may name
+one problem or four, so "wind slab **is** named" breaks the moment it names two;
+every sentence uses a phrase with no verb to agree — "with *the problems* at the
+surface" — instead.
 
 ## What the archive says
 
-Replaying the whole committed archive — 8,080 bulletins — through the classifier
-produces a distribution that shaped the copy more than any style guide could.
+We ran all 8,080 bulletins in the archive through the same rules.
 
 | Movement | Bulletins | Share |
 |---|---|---|
@@ -106,10 +114,15 @@ produces a distribution that shaped the copy more than any style guide could.
 | `shifting` | 78 | 1.0% |
 | `easing` | 22 | 0.3% |
 
-Two findings changed what the sentences say.
+Ninety-six pages in a hundred show one of the twenty static sentences, so those
+twenty carry most of the product. The rest of the table matters on the days a
+bulletin splits: a separate rating for the morning and the afternoon. There are
+312 of those. On 211 the level rises or eases; on the other 101 it holds.
 
-**A split day is the sun getting to work.** On 254 of the 312 days that split,
-the arriving problem is wet snow. Nothing else comes close, and a reader who
+Two findings from the split days changed what the sentences say.
+
+**A split day is the sun getting to work.** On 254 of the 312, the arriving
+problem is wet snow. Nothing else comes close, and a reader who
 understands that one fact has understood most of what a changing day means in
 practice.
 
@@ -124,20 +137,12 @@ swaps persistent weak layers for wet snow by afternoon reads:
 > layers and wet snow in play — the number eases, the problem swaps rather than
 > clears.
 
-A day
-whose danger genuinely receded would be a new case deserving new copy, not this
-one stretched to cover it.
-
-There is a second reason the transition clause exists. Swiss ratings carry a
-subdivision — a plus, a minus — so a day can move without its digit changing, and
-45 of the 211 changing days in the archive do exactly that. Naming both ends
-inline on those days produces "moderate this morning, moderate by afternoon",
-which reads as a rendering fault rather than a subdivision.
+A day whose danger receded would be a new case deserving new copy, not this one
+stretched to cover it.
 
 ## What it does not catch
 
-Of the 101 bulletins whose level holds across a split, 78 gain a genuinely new
-problem type and are classified `shifting`. Six carry two identical windows,
+Of the 101 split days whose level holds, 78 gain a new problem type and are classified `shifting`. Six carry two identical windows,
 which is the provider stamping one rating with two time periods, and are
 correctly treated as static.
 
@@ -147,9 +152,9 @@ the sentence does not mention it. That is a known under-report rather than a
 solved problem, and it is deliberate in this direction: the sentence omits
 something true rather than asserting something false. When the reader is deciding
 where to ski, those two failures are not equivalent. Fixing it properly means new
-copy for a new case, not reclassifying those days into a cell written about
+copy for a new case, not reclassifying those days into a sentence written about
 something else.
 
-And only 30 of the 80 cells have ever fired. The other 50 are written anyway,
-because provider behaviour is not a contract, and the cell nobody has seen is
-precisely the one nobody will notice rendering badly.
+And only 30 of the 80 sentences have ever appeared on a page. The other 50 are
+written anyway, because provider behaviour is not a contract, and the sentence
+nobody has seen is the one nobody will notice reading badly.
