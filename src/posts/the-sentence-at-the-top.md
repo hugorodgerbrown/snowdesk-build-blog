@@ -1,6 +1,6 @@
 ---
 title: The sentence at the top of every bulletin
-description: Every bulletin page in Snowdesk opens with one line telling you what kind of day it is. There are eighty of those lines, a person wrote every one, and the reason they are not generated is the interesting part.
+description: Every bulletin page in Snowdesk opens with one line telling you what kind of day it is. There are eighty of those lines, and the part that says what the day means for you was written by hand, because a template cannot produce it.
 date: 2026-09-22
 audience: [product]
 draft: true
@@ -15,9 +15,11 @@ Open a bulletin page in Snowdesk and the first thing on it is a short label —
 what kind of day this is — and beneath it one sentence explaining why. The label
 answers *what*. The sentence answers *why, and what does that mean for me*.
 
-There are eighty of those sentences. A person wrote every one, by hand, and the
-code that picks between them cannot generate a new one. That sounds like an
-oversight and it is the whole design.
+There are eighty of those sentences. The code fills in the names of the
+avalanche problems and, on a day that changes, the level at each end. The rest
+of each sentence — the part that tells you what the day means — a person wrote
+by hand, and the code cannot produce a new one. That sounds like an oversight
+and it is the whole design.
 
 ## What came before
 
@@ -62,16 +64,23 @@ was built to fix.
 
 ## Why a person wrote them
 
-Templating this is easy to imagine. Take the level word, splice in the problem
-names, add a clause about the direction of travel, and you have a sentence
+Part of each sentence is templated already. The problem names are spliced in,
+and a rising or easing day opens with a generated clause — "Easing: considerable
+this morning, moderate by afternoon". Going the rest of the way is easy to
+imagine: add a stock ending for each kind of problem, and you have a sentence
 generator that covers all eighty cells and any future ones for free.
 
 It produces sentences that are accurate and useless. What a reader needs from
 "considerable, with persistent weak layers buried" is not a restatement of the
 inputs — those are already on the page, in a rating block and a row of problem
-tags. What they need is the consequence: that nothing underfoot will warn them,
-so terrain choice is the only control they have left. That clause is a judgement
-about avalanche safety. It is not derivable from the three keys that select it.
+tags. What they need is the consequence. This is the sentence that day gets:
+
+> Considerable, with persistent weak layers buried — no warning underfoot, so
+> terrain choice is the only control left.
+
+Everything after the dash is a judgement about avalanche safety. It is not
+derivable from the three answers that select it, and it is the part a person
+wrote.
 
 So the eighty are written, reviewed, and constrained by tests. One sentence,
 ending in a full stop. A `quiet` cell may not name a problem; every other cell
@@ -107,8 +116,15 @@ practice.
 **Nothing ever improves.** All 22 days whose level falls do so by replacing a
 dry problem with wet snow. The number drops while the hazard swaps character. Not
 one bulletin in the archive has a falling level that means the snowpack cleared
-— so no easing sentence offers the afternoon as the safer half, and a test
-asserts that the word "improving" cannot appear anywhere in the table. A day
+— so no easing sentence offers the afternoon as the safer half, and the tests
+assert that an easing day's sentence never says it is improving. A day that
+swaps persistent weak layers for wet snow by afternoon reads:
+
+> Easing: considerable this morning, moderate by afternoon, with persistent weak
+> layers and wet snow in play — the number eases, the problem swaps rather than
+> clears.
+
+A day
 whose danger genuinely receded would be a new case deserving new copy, not this
 one stretched to cover it.
 
