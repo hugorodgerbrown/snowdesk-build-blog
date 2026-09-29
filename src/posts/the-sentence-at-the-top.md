@@ -1,6 +1,6 @@
 ---
 title: The sentence at the top of every bulletin
-description: Every bulletin page in Snowdesk opens with a label saying what kind of day it is and one sentence explaining it. There are eighty of those sentences, and the part that says what the day means for you was written by hand, because no rule could produce it.
+description: Every bulletin page in Snowdesk opens with a label and one sentence explaining it. There are eighty of those sentences, and the part that says what the day means for you was written by hand, because no rule could produce it.
 date: 2026-09-22
 audience: [product]
 draft: true
@@ -23,8 +23,9 @@ oversight and it is the whole design.
 
 ## What came before
 
-The label is picked by five rules, applied in order to the bulletin. For most of
-the project's life the explainer was one fixed string per label — five sentences
+The label is picked by five rules, applied in order to the bulletin.
+
+For most of the project's life the explainer was one fixed string per label — five sentences
 covering the entire archive. One of them, "persistent or gliding-snow problems
 can mask the real risk", went out on around 4,300 pages. It appeared whether the
 problem was persistent weak layers or gliding snow. Whether the danger was
