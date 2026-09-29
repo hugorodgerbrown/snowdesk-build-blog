@@ -74,7 +74,7 @@ written out as one table in `apps/bulletins/services/day_summary.py`. The page
 looks its sentence up there.
 
 There is no fallback. A combination missing from the table would stop the
-bulletin page loading at all, rather than show a generic sentence, because a
+bulletin page loading, rather than show a generic sentence, because a
 generic sentence is the failure the table was built to fix. A test checks that
 all eighty are filled. Others check what goes in them: a quiet day's sentence
 may not name a problem, and every other one must, so a day with a named problem
@@ -144,7 +144,7 @@ other changed what the sentences say.
 
 **A split day is the sun getting to work.** On 254 of the 312, the arriving
 problem is wet snow. A reader who understands that one fact has understood most
-of what a changing day means in practice — and what the sentence on a rising day
+of what a changing day means — and what the sentence on a rising day
 with wet snow tells them:
 
 > Deteriorating: moderate this morning, considerable by afternoon, with wet snow
