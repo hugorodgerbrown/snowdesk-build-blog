@@ -17,6 +17,9 @@ add a post.
   current app unless asked; set `updated:` in its front matter when you do.
 - **Every post needs `title`, `description` and `date`.** The description feeds
   the meta description, lede, feed and llms.txt.
+- **A post Claude writes sets `written_by: claude`.** The layout then shows the
+  "written by Claude" callout and names Claude as the JSON-LD author, with the
+  site author as editor. Never omit it on a post you wrote.
 - **Video is YouTube only, via the `youtube` shortcode.** Never commit video files.
 - **SEO/AEO output is generated, not hand-written.** Change `src/_data/site.js`
   or the layouts, never a single page's meta tags.

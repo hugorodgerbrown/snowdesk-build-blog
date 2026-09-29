@@ -204,6 +204,17 @@ main {
   margin: 0.25rem 0 0;
 }
 
+.post-callout {
+  margin: 1rem 0;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--text-2);
+  font-size: 0.9375rem;
+}
+
 .post-lede {
   font-size: 1.1875rem;
   color: var(--text-1);
@@ -242,7 +253,7 @@ figure.chart {
 figure.chart svg {
   width: 100%;
   height: auto;
-  font: 12px var(--font-sans);
+  font: 15px var(--font-sans);
   fill: var(--text-3);
 }
 

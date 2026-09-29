@@ -2,6 +2,17 @@
 layout: layouts/base.njk
 ---
 {%- set postUrl = page.url | siteUrl %}
+{#- written_by: claude in a post's front matter marks a post Claude wrote: the
+    page says so in a callout, and the JSON-LD names Claude as author with the
+    site author as editor, so readers and machines are told the same thing.
+    schema.org's author takes a Person or an Organization; Claude is neither,
+    and Organization is the less wrong of the two. #}
+{%- if written_by == "claude" %}
+  {%- set ldAuthor = { "@type": "Organization", "name": "Claude", "url": "https://claude.ai/" } %}
+  {%- set ldEditor = { "@type": "Person", "name": site.author.name } %}
+{%- else %}
+  {%- set ldAuthor = { "@type": "Person", "name": site.author.name } %}
+{%- endif %}
 <script type="application/ld+json">{{ {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -12,7 +23,8 @@ layout: layouts/base.njk
   "url": postUrl,
   "mainEntityOfPage": postUrl,
   "inLanguage": site.language,
-  "author": { "@type": "Person", "name": site.author.name },
+  "author": ldAuthor,
+  "editor": ldEditor,
   "publisher": { "@id": site.app.url + "#organization" },
   "isPartOf": { "@id": site.url + "#website" },
   "about": { "@type": "SoftwareApplication", "name": site.app.name, "url": site.app.url, "applicationCategory": "TravelApplication" }
@@ -24,6 +36,9 @@ layout: layouts/base.njk
       <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
       {%- if updated %} · updated <time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time>{% endif %}
     </p>
+    {%- if written_by == "claude" %}
+    <p class="post-callout" role="note"><span aria-hidden="true">✦</span> This post was written by Claude.</p>
+    {%- endif %}
     {%- if description %}
     <p class="post-lede">{{ description }}</p>
     {%- endif %}
