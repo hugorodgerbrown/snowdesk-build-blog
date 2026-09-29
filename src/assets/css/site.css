@@ -232,3 +232,25 @@ main {
   font-size: 0.9375rem;
   margin-top: 0.5rem;
 }
+
+/* Inline SVG charts in posts: sized to the column, coloured by the tokens
+   above so they follow the light/dark scheme. */
+figure.chart {
+  margin: 2rem 0;
+}
+
+figure.chart svg {
+  width: 100%;
+  height: auto;
+  font: 12px var(--font-sans);
+  fill: var(--text-3);
+}
+
+figure.chart .chart-strong {
+  fill: var(--text-1);
+}
+
+figure.chart figcaption {
+  font-size: 0.875rem;
+  color: var(--text-3);
+}
