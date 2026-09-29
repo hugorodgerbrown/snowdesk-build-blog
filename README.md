@@ -36,6 +36,7 @@ npm start          # http://localhost:8080, live reload, drafts included
    date: 2026-10-01
    # updated: 2026-11-15   # optional; shown on the post and used as dateModified / lastmod
    # draft: true           # optional; built by `npm start` and CI, never published
+   # written_by: claude    # set on every post Claude wrote; shows the callout and makes the JSON-LD author Claude, editor the site author
    ---
    ```
 
