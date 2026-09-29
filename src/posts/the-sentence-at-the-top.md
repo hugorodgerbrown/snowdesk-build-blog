@@ -36,8 +36,7 @@ five sentences covering the entire archive. The Hard-to-read day's, "persistent
 or gliding-snow problems can mask the real risk", went out on around 4,300
 pages. It appeared whether the
 problem was persistent weak layers or gliding snow. Whether the danger was
-moderate or considerable. Whether it held steady all day or rose a level
-by mid-afternoon.
+moderate or considerable.
 
 It was true every time. It described the rule that had picked the label rather
 than the day in front of you, and a reader who
@@ -49,10 +48,10 @@ bulletins learns to stop reading it.
 The sentence is chosen by asking three things about the day.
 
 **How does it move?** Some bulletins split the day, with separate morning and
-afternoon ratings. Four
-possibilities: *static*, where the level and the kinds of problem named hold all
-day; *rising*, where the level climbs into the afternoon; *easing*, where it
-falls; and *shifting*, where the number holds but the problem underneath it
+afternoon ratings. Four possibilities: *static*, where the level and the kinds
+of problem named hold all day; *rising*, where the rating climbs into the
+afternoon, by a whole level or by the plus or minus that SLF, the Swiss
+service, adds to one; *easing*, where it falls; and *shifting*, where the number holds but the problem underneath it
 changes.
 
 **Where does it end up?** The European danger scale, one to five: low,
@@ -109,13 +108,11 @@ A buried problem turns the same way:
 > High, with persistent weak layers buried — remote triggering is expected, and
 > nothing at the surface will warn you.
 
-Both say nothing at the surface will help. At low that is a reason for care in a
-few places; at high it means a slope can release from a distance, before you
-reach it. A stock ending for *hidden* could not carry both.
+Neither gives you anything to see. At low, that means care in a few places; at
+high, a slope can release from a distance, before you reach it. A stock ending for *hidden* could not carry both.
 
-Everything after the dash is a judgement about avalanche safety. A stock
-ending cannot turn the three answers into it; what they mean together had to be
-decided, eighty times.
+Everything after the dash is a judgement about avalanche safety, and a stock
+ending cannot make it from the three answers.
 
 That has a cost. A new answer to how the day moves, or to whether you can see
 the problem, means twenty more sentences to write. The table also exists
@@ -134,14 +131,10 @@ We ran all 8,080 bulletins in the archive through the same three questions.
 | Easing | 22 | 0.3% |
 
 Ninety-six pages in a hundred show one of the twenty static sentences. The rest
-of the table matters on the 312 days a bulletin splits. On 211 the level rises
-or eases; on the other 101 it holds, and 23 of those count as static, for
-reasons below.
-
-Of the 211, 45 move without the number changing. SLF, the Swiss service, adds a
-plus or minus to its ratings, and a day can go from moderate to moderate-plus.
-Printing "moderate this morning, moderate by afternoon" would read as a fault,
-so those days open "Deteriorating within moderate" instead.
+of the table matters on the 312 days a bulletin splits. On 211 the rating rises
+or eases; on the other 101 it holds. Of the 211, 45 move only by a plus or
+minus. "Moderate this morning, moderate by afternoon" would read as a fault, so
+those days open "Deteriorating within moderate" instead.
 
 **A split day is the sun getting to work.** On 254 of the 312, the arriving
 problem is wet snow. That one fact explains most changing days, and the
@@ -151,10 +144,9 @@ sentence a rising day with wet snow gets:
 > at the surface — turn round before it gets there.
 
 **No falling day is an all-clear.** All 22 days whose level falls do so by
-replacing a dry problem with wet snow. The number drops while the hazard swaps
-character. Not one bulletin in the archive has a falling level that means the
-snowpack cleared — so no easing sentence offers the afternoon as the safer half,
-and none of the twenty uses the word "improving". A day that swaps persistent
+replacing a dry problem with wet snow. Not one bulletin in the archive has a falling level that means the
+snowpack cleared — so no easing sentence offers the afternoon as the safer half.
+A day that swaps persistent
 weak layers for wet snow by afternoon reads:
 
 > Easing: considerable this morning, moderate by afternoon, with persistent weak
@@ -177,13 +169,18 @@ direction: the sentence omits something true rather than asserting something
 false. When the reader is deciding where to ski, those two failures are not
 equivalent.
 
+The easing sentences are the exception. They were written for the swap every
+falling day in the archive shows, and the code does not check for it. A day
+whose danger receded would get one of them and be told the problem swapped
+when it had cleared — the one place the table could assert something false. No
+such day has happened yet.
+
 ## Written before anyone needs them
 
-Only 30 of the 80 sentences match any bulletin in the archive. The other 50 are
-written anyway, because what the forecasting services publish can change without
-notice, and the sentence nobody has seen is the one nobody will notice reading
-badly.
+Only 30 of the 80 sentences are used by any bulletin in the archive. The other 50 are
+written with the same care, because what the forecasting services publish can
+change without notice, and a sentence nobody has read yet is where a careless
+line would go unnoticed.
 
-The 17 days above are the gap we know about. Fixing them properly means new copy
-for a new case, not reclassifying those days into a sentence written about
-something else.
+The 17 days and the receding easing day are the gaps we know about. Each needs
+new copy for a new case.
