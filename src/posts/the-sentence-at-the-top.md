@@ -72,8 +72,8 @@ Four by five by four is eighty combinations, each with its sentence in one
 table in `apps/bulletins/services/day_summary.py`.
 
 There is no fallback. A combination missing from the table would stop the
-bulletin page loading, rather than show a generic sentence, because a
-generic sentence is the failure the table was built to fix. A test checks that
+bulletin page loading, rather than show the kind of generic sentence the
+table was built to replace. A test checks that
 all eighty are filled. Others check what goes in them: a quiet day's sentence
 may not name a problem, and every other one must, so a day with a named problem
 is never described without naming it. No two combinations may share a sentence,
@@ -112,7 +112,8 @@ Neither gives you anything to see. At low, that means care in a few places; at
 high, a slope can release from a distance, before you reach it. A stock ending for *hidden* could not carry both.
 
 Everything after the dash is a judgement about avalanche safety, and a stock
-ending picked by one answer cannot make it.
+ending picked by one answer cannot make it. Claude, which wrote this post, wrote
+all eighty.
 
 That has a cost. A new answer to how the day moves, or to whether you can see
 the problem, means twenty more sentences to write. The table also exists
@@ -146,8 +147,8 @@ sentence a rising day with wet snow gets:
 **No falling day is an all-clear.** All 22 days whose level falls do so by
 replacing a dry problem with wet snow. Not one bulletin in the archive has a falling level that means the
 snowpack cleared — so no easing sentence offers the afternoon as the safer half.
-A day that swaps persistent
-weak layers for wet snow by afternoon reads:
+A swap from persistent weak
+layers to wet snow reads:
 
 > Easing: considerable this morning, moderate by afternoon, with persistent weak
 > layers and wet snow in play — the number eases, the problem swaps rather than
