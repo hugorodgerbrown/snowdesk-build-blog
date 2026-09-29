@@ -9,25 +9,32 @@ sources:
   - snowdesk-data-pipeline apps/bulletins/services/day_summary.py
   - snowdesk-data-pipeline apps/bulletins/services/render_model.py
   - snowdesk-data-pipeline docs/day_character_rules_spec.md
+  - snowdesk-data-pipeline tests/bulletins/services/test_day_summary.py
 ---
 
 Open a bulletin page in Snowdesk and the first thing on it is a short label —
-what kind of day this is — and beneath it one sentence explaining why. The label
-answers *what*. The sentence answers *why, and what does that mean for me*.
+what kind of day this is — and beneath it one sentence explaining why. On a day
+of considerable danger with a buried weak layer, the page opens:
 
-There are eighty of those sentences. The code fills in the names of the
-avalanche problems and, on a day the level rises or falls, how it moved. The
-rest of each sentence — the part that tells you what the day means — a person
-wrote by hand, and the code cannot produce a new one. That sounds like an
+> **Hard-to-read day**<br>
+> Considerable, with persistent weak layers buried — no warning underfoot, so
+> terrain choice is the only control left.
+
+The label answers *what*. The sentence answers *why, and what does that mean for
+me*. There are five labels, picked by five rules applied in order, and eighty
+sentences.
+
+The code fills in the names of the avalanche problems and, on a day
+the level rises or falls, how it moved. The rest of each sentence — the part
+that tells you what the day means — a person wrote by hand. That sounds like an
 oversight and it is the whole design.
 
 ## What came before
 
-The label is picked by five rules, applied in order to the bulletin.
-
-For most of the project's life the explainer was one fixed string per label — five sentences
-covering the entire archive. One of them, "persistent or gliding-snow problems
-can mask the real risk", went out on around 4,300 pages. It appeared whether the
+For most of the project's life the explainer was one fixed sentence per label —
+five sentences covering the entire archive. The Hard-to-read day's, "persistent
+or gliding-snow problems can mask the real risk", went out on around 4,300
+pages. It appeared whether the
 problem was persistent weak layers or gliding snow. Whether the danger was
 moderate or considerable. Whether it held steady all day or doubled by
 mid-afternoon.
@@ -48,7 +55,8 @@ day; *rising*, where the level climbs into the afternoon; *easing*, where it
 falls; and *shifting*, where the number holds but the problem underneath it
 changes.
 
-**Where does it end up?** The European danger scale, one to five.
+**Where does it end up?** The European danger scale, one to five: low,
+moderate, considerable, high, very high.
 
 **Can you see the problem?** This is the axis that does the work. Some avalanche
 problems leave evidence on the surface that a competent party can go and read:
@@ -74,13 +82,9 @@ all eighty are filled, so that cannot ship.
 
 Part of each sentence is templated already. The problem names are spliced in,
 and a rising or easing day opens with a generated clause saying how the level
-moved — "Easing: considerable this morning, moderate by afternoon". SLF, the
-Swiss avalanche service, adds a plus or a minus to its ratings, so a day can
-move without its digit changing; those days open "Deteriorating within
-moderate" or "Easing within moderate" rather than "moderate this morning,
-moderate by afternoon", which would read as a fault on the page.
-
-Going the rest of the way is easy to imagine: add a stock ending for each of
+moved — "Easing: considerable this morning, moderate by afternoon", or "Easing
+within moderate" when SLF, the Swiss avalanche service, has moved only the plus
+or minus on its rating. Going the rest of the way is easy to imagine: add a stock ending for each of
 the four answers to *can you see the problem?*, and you have a sentence
 generator that covers all eighty combinations and any future ones for free.
 
@@ -99,14 +103,17 @@ helps, because there is too much of it for any choice of line to avoid. A stock
 ending for *readable* would have to say one of those on both days, and on one of
 them it would be dangerous.
 
-A buried problem gets advice a readable one never can:
-
-> Considerable, with persistent weak layers buried — no warning underfoot, so
-> terrain choice is the only control left.
+A buried problem gets advice a readable one never can, as in the sentence at the
+top of this post: no warning underfoot, so terrain choice is the only control
+left.
 
 Everything after the dash is a judgement about avalanche safety. No rule turns
 the three answers into it; someone had to decide what they mean together, eighty
 times.
+
+That has a cost. A new answer to how the day moves, or to whether you can see
+the problem, means twenty more sentences to write by hand. The table also exists only in English, so a second
+language means translating eighty judgements, not eighty strings.
 
 The tests hold the table to that. A quiet day's sentence may not name a problem,
 and every other one must, so no day is described without saying what the danger
@@ -146,13 +153,10 @@ weak layers for wet snow by afternoon reads:
 > layers and wet snow in play — the number eases, the problem swaps rather than
 > clears.
 
-A day whose danger receded would be a new case deserving new copy, not this one
-stretched to cover it.
-
 ## What it does not catch
 
-Of the 101 split days whose level holds, 78 gain a new problem type and are
-classified as shifting. Six carry two identical windows, which is the provider
+Of the 101 split days whose level holds, 78 name different kinds of problem in
+the morning and the afternoon and are classified as shifting. Six carry two identical windows, which is the provider
 stamping one rating with two time periods, and are correctly treated as static.
 
 The remaining 17 keep the same problem types on different aspects or elevations —
@@ -165,7 +169,7 @@ equivalent.
 
 ## Written before anyone needs them
 
-Only 30 of the 80 sentences have ever appeared on a page. The other 50 are
+Only 30 of the 80 sentences match any bulletin in the archive. The other 50 are
 written anyway, because provider behaviour is not a contract, and the sentence
 nobody has seen is the one nobody will notice reading badly.
 
