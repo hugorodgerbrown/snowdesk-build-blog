@@ -131,10 +131,10 @@ We ran all 8,080 bulletins in the archive through the same three questions.
 | Easing | 22 | 0.3% |
 
 Ninety-six pages in a hundred show one of the twenty static sentences. The rest
-of the table matters on the 312 days a bulletin splits. On 211 the rating rises
+of the table matters mostly on the 312 days a bulletin splits. On 211 the rating rises
 or eases; on the other 101 it holds. Of the 211, 45 move only by a plus or
 minus. "Moderate this morning, moderate by afternoon" would read as a fault, so
-those days open "Deteriorating within moderate" instead.
+those days open with something like "Deteriorating within moderate" instead.
 
 **A split day is the sun getting to work.** On 254 of the 312, the arriving
 problem is wet snow. That one fact explains most changing days, and the
@@ -169,10 +169,10 @@ direction: the sentence omits something true rather than asserting something
 false. When the reader is deciding where to ski, those two failures are not
 equivalent.
 
-The easing sentences are the exception. They were written for the swap every
+The easing sentences are an exception. They were written for the swap every
 falling day in the archive shows, and the code does not check for it. A day
-whose danger receded would get one of them and be told the problem swapped
-when it had cleared, which is false. No such day has happened yet.
+whose danger receded would get one of them and be told the danger had not
+really eased when it had, which is false. No such day has happened yet.
 
 ## Written before anyone needs them
 
@@ -181,5 +181,5 @@ written with the same care, because what the forecasting services publish can
 change without notice, and a sentence nobody has read yet is where a careless
 line would go unnoticed.
 
-The 17 days and the receding easing day are the gaps we know about. Each needs
+The 17 days and a day whose danger recedes are two gaps we know about. Each needs
 new copy for a new case.
