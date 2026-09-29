@@ -1,6 +1,6 @@
 ---
 title: The sentence at the top of every bulletin
-description: Every bulletin page in Snowdesk opens with a label and one sentence explaining it. There are eighty of those sentences, and the part that says what the day means for you was written by hand, because no rule could produce it.
+description: Every bulletin page in Snowdesk opens with a label and one sentence explaining it. There are eighty of those sentences, and the part that says what the day means for you is written out for each one rather than generated.
 date: 2026-09-22
 audience: [product]
 draft: true
@@ -21,13 +21,13 @@ of considerable danger with a buried weak layer, the page opens:
 > terrain choice is the only control left.
 
 The label answers *what*. The sentence answers *why, and what does that mean for
-me*. There are five labels, picked by five rules applied in order, and eighty
-sentences.
+me*. The two are chosen separately, and this post is about the sentence.
 
-The code fills in the names of the avalanche problems and, on a day
-the level rises or falls, how it moved. The rest of each sentence — the part
-that tells you what the day means — a person wrote by hand. That sounds like an
-oversight and it is the whole design.
+There are eighty sentences. The code fills in the names of the avalanche
+problems and, on a day the level rises or falls, how it moved. The rest of each
+sentence — the part that tells you what the day means — is written out, one
+sentence per combination, rather than generated. That sounds like an oversight
+and it is the whole design.
 
 ## What came before
 
@@ -81,7 +81,7 @@ may not name a problem, and every other one must, so a day with a named problem
 is never described without naming it. No two combinations may share a sentence,
 because a duplicate means one was written twice and another was missed.
 
-## Why a person wrote them
+## Why each one is written out
 
 Going further than filling in names is easy to imagine: add a stock ending for
 each of the four answers to *can you see the problem?*, and you have a sentence
@@ -114,18 +114,18 @@ Both say nothing at the surface will help. At low that is a reason for care in a
 few places; at high it means a slope can release from a distance, before you
 reach it. A stock ending for *hidden* could not carry both.
 
-Everything after the dash is a judgement about avalanche safety. No rule turns
-the three answers into it; someone had to decide what they mean together, eighty
-times.
+Everything after the dash is a judgement about avalanche safety. A stock
+ending cannot turn the three answers into it; what they mean together had to be
+decided, eighty times.
 
 That has a cost. A new answer to how the day moves, or to whether you can see
-the problem, means twenty more sentences to write by hand. The table also exists
+the problem, means twenty more sentences to write. The table also exists
 only in English, so a second language means translating eighty judgements, not
 eighty strings.
 
 ## What the archive says
 
-We ran all 8,080 bulletins in the archive through the same rules.
+We ran all 8,080 bulletins in the archive through the same three questions.
 
 | Movement | Bulletins | Share |
 |---|---|---|
@@ -138,9 +138,6 @@ Ninety-six pages in a hundred show one of the twenty static sentences, so those
 twenty are what most readers will ever see. The rest of the table matters on
 the days a bulletin splits. There are 312 of those. On 211 the level rises or
 eases; on the other 101 it holds.
-
-Two findings from the split days: one says what a changing day usually is, the
-other changed what the sentences say.
 
 **A split day is the sun getting to work.** On 254 of the 312, the arriving
 problem is wet snow. A reader who understands that one fact has understood most
@@ -164,8 +161,10 @@ weak layers for wet snow by afternoon reads:
 ## What it does not catch
 
 Of the 101 split days whose level holds, 78 name different kinds of problem in
-the morning and the afternoon and are classified as shifting. Six carry two identical windows, which is the provider
-stamping one rating with two time periods, and are correctly treated as static.
+the morning and the afternoon and are classified as shifting. Six carry two
+identical ratings — the forecasting service that issued the bulletin, which
+Snowdesk does not control, stamping one rating with two time periods — and are
+correctly treated as static.
 
 The remaining 17 keep the same problem types on different aspects or elevations —
 wet snow retreating from sunny slopes to below a line, say. They are treated as
@@ -178,9 +177,10 @@ equivalent.
 ## Written before anyone needs them
 
 Only 30 of the 80 sentences match any bulletin in the archive. The other 50 are
-written anyway, because provider behaviour is not a contract, and the sentence
-nobody has seen is the one nobody will notice reading badly.
+written anyway, because what the forecasting services publish can change without
+notice, and the sentence nobody has seen is the one nobody will notice reading
+badly.
 
-The 17 days above are the next gap to close. Fixing them properly means new copy
+The 17 days above are the gap we know about. Fixing them properly means new copy
 for a new case, not reclassifying those days into a sentence written about
 something else.
