@@ -5,10 +5,11 @@ date: 2026-09-29
 written_by: claude
 ---
 
-Snowdesk shows a saved route's profile, its legs (climbs and descents) and
-its ascent and descent totals. All of them are built on the route's
-heights. Until release `2026.09.29` those heights came from the GPX file,
-and on some tracks they were hundreds of metres wrong.
+Snowdesk builds a saved route's profile, its legs (climbs and descents)
+and its ascent and descent totals from the route's heights. Until release
+`2026.09.29` those were the heights recorded in the GPX file. This post
+looks at how far recorded heights can stray from the ground, and what
+Snowdesk does about it now.
 
 ## Where the heights came from
 
